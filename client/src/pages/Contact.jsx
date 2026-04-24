@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import portfolioData from '../data/portfolioData';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const encode = (data) => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
 
 export default function Contact() {
   const { personal } = portfolioData;
@@ -19,23 +23,22 @@ export default function Contact() {
     setStatus(null);
 
     try {
-      const res = await fetch(`${API_URL}/api/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({ "form-name": "contact", ...form })
       });
-      const data = await res.json();
 
-      if (data.success) {
-        setStatus({ type: 'success', message: data.message });
+      if (res.ok) {
+        setStatus({ type: 'success', message: 'Message sent successfully! I will get back to you soon.' });
         setForm({ name: '', email: '', phone: '', message: '' });
       } else {
-        setStatus({ type: 'error', message: data.message });
+        setStatus({ type: 'error', message: 'Something went wrong. Please try again.' });
       }
     } catch {
       setStatus({
         type: 'error',
-        message: 'Unable to connect to server. Please try again later.',
+        message: 'Unable to send message. Please try again later.',
       });
     } finally {
       setLoading(false);
@@ -112,7 +115,7 @@ export default function Contact() {
 
             {/* Contact Form */}
             <div className="glass-card" style={{ padding: '2rem' }}>
-              <form className="contact-form" onSubmit={handleSubmit}>
+              <form name="contact" className="contact-form" onSubmit={handleSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
