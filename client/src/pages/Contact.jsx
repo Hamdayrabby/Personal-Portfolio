@@ -1,11 +1,9 @@
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import portfolioData from '../data/portfolioData';
 
-const encode = (data) => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&");
-};
+// Initialize EmailJS with your public key
+emailjs.init("ANG8Bxt75tbHk2y2U");
 
 export default function Contact() {
   const { personal } = portfolioData;
@@ -17,32 +15,30 @@ export default function Contact() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
 
-    try {
-      const res = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({ "form-name": "contact", ...form })
-      });
+    const templateParams = {
+        from_name: form.name,
+        from_email: form.email,
+        phone_number: form.phone,
+        message: form.message
+    };
 
-      if (res.ok) {
-        setStatus({ type: 'success', message: 'Message sent successfully! I will get back to you soon.' });
+    emailjs.send('service_okborg6', 'template_783gw16', templateParams)
+      .then(() => {
+        setStatus({ type: 'success', message: 'Message sent successfully!' });
         setForm({ name: '', email: '', phone: '', message: '' });
-      } else {
-        setStatus({ type: 'error', message: 'Something went wrong. Please try again.' });
-      }
-    } catch {
-      setStatus({
-        type: 'error',
-        message: 'Unable to send message. Please try again later.',
+      })
+      .catch((error) => {
+        console.error('EmailJS Error:', error);
+        setStatus({ type: 'error', message: 'Failed to send message. Please try again later.' });
+      })
+      .finally(() => {
+        setLoading(false);
       });
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (
