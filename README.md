@@ -1,4 +1,4 @@
-# 🚀 Futuristic MERN Portfolio — Hamday Rabby Hossain
+# 🚀Portfolio — Hamday Rabby Hossain
 
 A modern, futuristic portfolio built with the **MERN Stack** (MongoDB, Express.js, React, Node.js) with a cyberpunk-inspired dark theme.
 
