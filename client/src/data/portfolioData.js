@@ -2,14 +2,14 @@
 const portfolioData = {
   personal: {
     name: "Hamday Rabby Hossain",
-    title: "Full Stack Developer",
-    subtitle: "MERN Stack & Applied Machine Learning",
+    title: "AI Engineer & Software Developer",
+    subtitle: "Applied Machine Learning & MERN Stack",
     greeting: "Hello, I'm",
-    tagline: "CS Graduate · MERN Stack · Machine Learning",
+    tagline: "CS Graduate · AI Engineer · Software Developer",
     summary:
-      "Full Stack Developer building scalable MERN applications and solving real-world problems through ML & AI. Strong algorithmic foundation with 1000+ solved problems across multiple platforms.",
+      "Aspiring AI Engineer and Software Developer building scalable MERN applications and solving real-world problems through ML & AI. Strong algorithmic foundation with 1000+ solved problems across multiple platforms.",
     about:
-      "I'm a Computer Science graduate who builds clean, production-ready software and applies ML & AI to solve real-life problems. Experienced in full-stack web development with the MERN stack, building ML models for real-world use cases, and integrating generative AI into applications. I focus on turning complex ideas into practical, well-architected solutions — from data preprocessing to deployment.",
+      "I'm a Computer Science graduate who builds clean, production-ready software and applies ML & AI to solve real-life problems. Experienced in research, full-stack web development with the MERN stack, building ML models, and integrating generative AI into applications (RAG, multi-agent workflows). I focus on turning complex ideas into practical, well-architected solutions — from data preprocessing to deployment.",
     location: "Dhaka, Bangladesh",
     email: "hamdayrabby385@gmail.com",
     phone: "+8801720908856",
@@ -20,8 +20,9 @@ const portfolioData = {
     resumeLink:
       "https://drive.google.com/drive/folders/1XoXvKh_4OuX0FQK6tvhTnqsYz42Yz8Kd?usp=sharing",
     roles: [
+      "AI Engineer",
+      "Software Developer",
       "Full Stack Developer",
-      "Software Engineer",
       "Researcher",
       "AI & ML Enthusiast",
     ],
@@ -52,28 +53,28 @@ const portfolioData = {
 
   skills: [
     {
-      category: "Languages",
-      items: ["C/C++", "Python", "JavaScript", "SQL"],
+      category: "Programming",
+      items: ["Python", "JavaScript", "C++"],
     },
     {
-      category: "Frontend",
-      items: ["React", "HTML5", "CSS3", "Tailwind CSS"],
+      category: "Machine Learning & AI",
+      items: ["Supervised Learning", "Ensemble Learning", "Model Evaluation", "Transformer Models", "Explainable AI"],
     },
     {
-      category: "Backend & Databases",
-      items: ["Node.js", "Express.js", "MongoDB", "MySQL", "Mongoose", "JWT"],
+      category: "Generative AI",
+      items: ["LLM Integration", "AI Agents", "Prompt Engineering", "RAG", "Multi-Agent Workflows", "AWS PartyRock"],
     },
     {
-      category: "Machine Learning",
-      items: ["Scikit-learn", "TensorFlow", "SHAP", "Pandas", "NumPy", "Streamlit"],
+      category: "Software Development",
+      items: ["React", "Node.js", "Express.js", "REST APIs", "JWT Authentication"],
     },
     {
-      category: "AI & GenAI",
-      items: ["Prompt Engineering", "LLM APIs", "OpenAI API", "Gemini API"],
+      category: "Databases",
+      items: ["MySQL", "MongoDB"],
     },
     {
       category: "Tools & Platforms",
-      items: ["Git", "GitHub", "Vercel", "Render", "Kaggle"],
+      items: ["Git", "GitHub", "Streamlit", "Vercel", "Render", "Kaggle", "AWS Bedrock"],
     },
   ],
 
@@ -85,9 +86,9 @@ const portfolioData = {
       type: "software",
       featured: true,
       features: [
-        "Stage-based recruitment tracker (Applied/Interview/Offer) with full lifecycle management.",
-        "AI-powered semantic resume–job matching with ATS-aware scoring, improving keyword coverage by 15–30%.",
-        "Production-deployed MERN app with JWT authentication, role-based authorization, and secure API integration.",
+        "Built a stage-based job tracker to manage the recruitment lifecycle across Applied, Interview, and Offer stages.",
+        "Developed AI-powered semantic resume matching and ATS scoring to generate targeted improvement suggestions.",
+        "Designed and implemented secure RESTful APIs with JWT authentication and role-based access control.",
       ],
       tech: ["React", "Express", "MongoDB", "JWT", "Tailwind CSS", "Prompt Engineering"],
       liveUrl: "https://knotic-sense.vercel.app/",
@@ -101,9 +102,9 @@ const portfolioData = {
       type: "software",
       featured: true,
       features: [
-        "MERN-based recipe platform with role-based user and admin access.",
+        "Built a MERN-based recipe platform with role-based user and admin access.",
         "Integrated AI-driven recipe generation for personalized cooking suggestions.",
-        "Responsive frontend with reusable components, deployed on Vercel and Render.",
+        "Developed secure backend APIs supporting authentication and moderation workflows.",
       ],
       tech: ["React", "Express", "MongoDB", "JWT", "HTML", "CSS"],
       liveUrl: "https://let-s-cook-ruddy.vercel.app",
@@ -112,6 +113,38 @@ const portfolioData = {
     },
     {
       id: 3,
+      title: "Spendly",
+      subtitle: "Personal Finance & Expense Tracker",
+      type: "software",
+      featured: true,
+      features: [
+        "Developed a MERN-stack personal finance application for tracking expenses and financial goals.",
+        "Built interactive analytics dashboards using MongoDB aggregation and Recharts for spending insights.",
+        "Implemented robust security featuring JWT refresh token flows, bcrypt, Helmet, and API rate limiting.",
+      ],
+      tech: ["React", "Express", "MongoDB", "Tailwind CSS", "Recharts", "JWT", "Helmet"],
+      liveUrl: "https://spendly.vercel.app/",
+      githubUrl: "https://github.com/Hamdayrabby/Spendly",
+      image: null,
+    },
+    {
+      id: 4,
+      title: "Smart Study Assistant Pro",
+      subtitle: "AI-Powered Personalized Study Planner",
+      type: "ml",
+      featured: true,
+      features: [
+        "Developed an interactive personalized study planner leveraging AWS PartyRock (Bedrock) GenAI playgrounds.",
+        "Configured custom prompt templates and generative chat assistants to adapt study modules based on user schedule and academic focus.",
+        "Built automated course syllabus break-downs and quiz generation workflows.",
+      ],
+      tech: ["AWS PartyRock", "Amazon Bedrock", "Prompt Engineering", "Generative AI"],
+      liveUrl: "https://partyrock.aws/u/hamdayrabby385/Z_BZNL4hm/Smart-Study-Assistant-Pro",
+      githubUrl: null,
+      image: null,
+    },
+    {
+      id: 5,
       title: "GradeSync",
       subtitle: "Java Result Management System",
       type: "software",
@@ -126,15 +159,15 @@ const portfolioData = {
       image: null,
     },
     {
-      id: 4,
+      id: 6,
       title: "Telecom Churn Prediction",
       subtitle: "Machine Learning Thesis Project",
       type: "ml",
       featured: true,
       features: [
-        "Churn prediction model achieving 92% recall using ensemble methods and SHAP-based explainability.",
-        "Interactive Streamlit app covering data overview, EDA, preprocessing, and real-time prediction.",
-        "Comparative performance analysis with standard and advanced model evaluation pipelines.",
+        "Developed machine learning models for telecom customer churn analysis using feature engineering, ensemble learning, and explainable AI techniques.",
+        "Designed an interpretable ensemble framework for real-time churn prediction with a deployed web application for interactive prediction and analysis.",
+        "Presented research at the IEEE CS BDC Summer Symposium 2025.",
       ],
       tech: ["Python", "Streamlit", "Scikit-learn", "SHAP"],
       liveUrl:
@@ -146,15 +179,15 @@ const portfolioData = {
       image: null,
     },
     {
-      id: 5,
+      id: 7,
       title: "AI Concierge Chef",
       subtitle: "Generative AI Agent",
       type: "ml",
       featured: false,
       features: [
-        "Generative AI agent transforming leftover ingredients into contextual recipe recommendations.",
-        "Agent-based workflows using LLM APIs and prompt engineering for reasoning.",
-        "Evaluated for relevance, coherence, and real-world usability.",
+        "Built a generative AI agent transforming leftover ingredients into contextual recipe recommendations.",
+        "Designed agent workflows using LLM APIs and prompt engineering for reasoning and generation.",
+        "Evaluated agent outputs for relevance, coherence, and production usability.",
       ],
       tech: [
         "Python",
@@ -172,10 +205,18 @@ const portfolioData = {
 
   experience: [
     {
+      title: "Research Assistant",
+      organization: "Humach Lab",
+      location: "Remote",
+      date: "Feb 2026 – June 2026",
+      description:
+        "Contributed to transformer-based NLP research involving dataset preprocessing, model experimentation, evaluation workflows, and AI/ML pipeline development.",
+    },
+    {
       title: "General Secretary",
       organization: "CSE Club of HSTU",
       location: "Dinajpur, Bangladesh",
-      date: "2024 – 2025",
+      date: "Jan 2025 – Aug 2025",
       description:
         "Led the executive committee in organizing tech festivals, programming contests, and workshops. Managed club operations and fostered a collaborative environment for students.",
     },
@@ -183,7 +224,7 @@ const portfolioData = {
       title: "Publication & IT Secretary",
       organization: "Programmers Arena, HSTU",
       location: "Dinajpur, Bangladesh",
-      date: "2023 – 2025",
+      date: "Jan 2024 – Aug 2025",
       description:
         "Managed digital content, publications, and IT infrastructure. Facilitated competitive programming training sessions and coordinated inter-university events.",
     },
@@ -191,7 +232,7 @@ const portfolioData = {
       title: "Assistant IT Secretary",
       organization: "CSE Club of HSTU",
       location: "Dinajpur, Bangladesh",
-      date: "2022 – 2023",
+      date: "Jan 2022 – Dec 2022",
       description:
         "Assisted in managing club IT operations, maintaining the club's digital presence, and supporting event organization for tech-related activities.",
     },
@@ -199,7 +240,7 @@ const portfolioData = {
       title: "Campus Ambassador",
       organization: "Team Matrix Elite Hackers",
       location: "Remote",
-      date: "2021 – 2024",
+      date: "May 2021 – Dec 2024",
       description:
         "Represented the organization on campus, promoted cybersecurity awareness, and organized seminars on ethical hacking and network security.",
     },
@@ -212,7 +253,7 @@ const portfolioData = {
       institution: "Hajee Mohammad Danesh Science & Technology University",
       shortName: "HSTU",
       location: "Dinajpur-5200",
-      date: "Jan 2020 – Oct 2025",
+      date: "Jan 2020 – Dec 2023",
       cgpa: "3.399 / 4.00",
       description:
         "Coursework in Data Structures, Algorithms, Artificial Intelligence, and Database Management Systems.",
@@ -240,30 +281,55 @@ const portfolioData = {
   research: [
     {
       title:
+        "Synthetic Evolution and Adversarial Resilience in Bangla Fake News Detection",
+      venue: "Ongoing Research Project",
+      type: "AI & NLP Research",
+      description:
+        "Studied AI-generated Bangla misinformation using Zero/Few-Shot prompting and developed an AI-polishing framework with LLMs to evaluate detector robustness against AI-laundered fake news.",
+    },
+    {
+      title:
         "Telecommunication Customer Churn Prediction using Machine Learning",
       venue: "IEEE CS BDC Summer Symposium 2025",
       type: "Research Presentation",
+      description:
+        "Developed machine learning models for telecom customer churn analysis using feature engineering, ensemble learning, and explainable AI techniques.",
     },
     {
       title:
         "An Interpretable Ensemble Learning Approach for Real-Time Telecom Customer Churn Prediction",
       venue: "Undergraduate Thesis",
       type: "Thesis",
-      liveUrl: "#",
+      liveUrl: "https://telecom-customer-churn-prediction-webapp.streamlit.app/",
+      description:
+        "Designed an interpretable ensemble framework for real-time churn prediction with a deployed web application for interactive prediction and analysis.",
     },
   ],
 
   competitiveProgramming: [
     { event: "ICPC Dhaka Regional Preliminary Contest", years: "2022, 2023, 2024", highlight: false },
-    { event: "SUST IUPC", years: "2023", place: "5th", highlight: true },
-    { event: "Rangpur Divisional Collegiate Programming Contest", years: "2024", place: "7th", highlight: true },
-    { event: "IUPC (Intra University)", years: "2023", place: "5th", highlight: true },
+    { event: "NCPC Preliminary", years: "2024", highlight: false },
+    { event: "Rangpur Divisional Programming Contest", years: "2024", place: "7th", highlight: true },
+    { event: "SUST IUPC", years: "2024", place: "108th", highlight: true },
+    { event: "Intra University Programming Contest", years: "2023", place: "5th", highlight: true },
+    { event: "Intra University Programming Contest", years: "2022", place: "9th", highlight: false },
+    { event: "HSTU CSE Fest Project Exhibition", years: "2025", highlight: true }
   ],
 
   certifications: [
-    "Database Training (MySQL/Oracle/SQL Server) — 80 Hours (EDGE Project)",
-    "Full Stack Web Development with JavaScript (MERN) — Ostad",
-    "5-Day AI Agents Intensive Course — Google, Kaggle",
+    {
+      name: "AWS AI Practitioner Challenge — Udacity (Part of Accenture) 2026",
+      image: "/assets/aws_ai_practitioner_cert.png"
+    },
+    {
+      name: "5-Day AI Agents Intensive Course — Kaggle — Google 2025",
+    },
+    {
+      name: "Full Stack Web Development with JavaScript (MERN) — Ostad 2024",
+    },
+    {
+      name: "Database Training (MySQL/Oracle/SQL Server) — 80 Hours (EDGE Project) 2024",
+    },
   ],
 };
 

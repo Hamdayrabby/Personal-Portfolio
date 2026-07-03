@@ -97,9 +97,43 @@ export default function Resume() {
           <div className="resume-section-title reveal">Certifications</div>
           <div className="cert-grid">
             {certifications.map((cert, i) => (
-              <div className="glass-card cert-item reveal" key={i}>
-                <span className="icon">🎓</span>
-                <p>{cert}</p>
+              <div 
+                className="glass-card cert-item reveal" 
+                key={i} 
+                style={{ 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  gap: '1rem', 
+                  alignItems: 'flex-start',
+                  padding: '1.5rem' 
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <span className="icon">🎓</span>
+                  <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 600 }}>
+                    {typeof cert === 'string' ? cert : cert.name}
+                  </p>
+                </div>
+                {cert.image && (
+                  <div className="cert-preview-container" style={{ width: '100%', marginTop: '0.5rem' }}>
+                    <a href={cert.image} target="_blank" rel="noopener noreferrer" title="View Full Certificate">
+                      <img 
+                        src={cert.image} 
+                        alt={cert.name} 
+                        style={{ 
+                          width: '100%', 
+                          maxHeight: '160px', 
+                          objectFit: 'cover', 
+                          borderRadius: '8px', 
+                          border: '1px solid rgba(0, 240, 255, 0.15)',
+                          cursor: 'zoom-in',
+                          transition: 'var(--transition-fast)'
+                        }}
+                        className="cert-img-preview"
+                      />
+                    </a>
+                  </div>
+                )}
               </div>
             ))}
           </div>

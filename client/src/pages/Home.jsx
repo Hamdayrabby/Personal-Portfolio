@@ -45,9 +45,15 @@ export default function Home() {
       <section className="hero" id="hero">
         <div className="container">
           <div className="hero-content">
-            <div className="hero-badge">
-              <span className="badge-icon">◆</span>
-              {personal.tagline}
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+              <div className="hero-badge" style={{ marginBottom: 0 }}>
+                <span className="badge-icon">◆</span>
+                {personal.tagline}
+              </div>
+              <div className="hire-badge">
+                <span className="pulse-dot"></span>
+                Available For Hire
+              </div>
             </div>
             <p className="hero-greeting">{personal.greeting}</p>
             <h1 className="hero-name">
@@ -61,11 +67,11 @@ export default function Home() {
               {personal.summary}
             </p>
             <div className="hero-cta">
-              <Link to="/projects" className="btn btn-primary">
-                View Projects
+              <Link to="/contact" className="btn btn-primary">
+                Hire Me
               </Link>
-              <Link to="/resume" className="btn btn-outline">
-                My Resume
+              <Link to="/playground" className="btn btn-outline">
+                AI/ML Playground
               </Link>
             </div>
           </div>
@@ -255,19 +261,42 @@ export default function Home() {
         </div>
       </section>
 
+      {/* AI/ML Playground CTA */}
+      <section className="section section-alt playground-cta-section">
+        <div className="container">
+          <div className="glass-card playground-cta-card reveal" style={{ padding: '3.5rem 2rem', textAlign: 'center', border: '1px solid var(--border-glow)', boxShadow: 'var(--shadow-glow)' }}>
+            <span className="section-label">Interactive Sandbox</span>
+            <h2 className="section-title">Try the AI & ML Playground</h2>
+            <p className="section-subtitle" style={{ maxWidth: '700px', margin: '0 auto 2rem auto', color: 'var(--text-secondary)' }}>
+              Test interactive data science and generative AI integrations directly in the browser. Adjust customer metrics in real-time to analyze churn probability, or generate custom recipes with the AI Recipe Planner.
+            </p>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+              <Link to="/playground" className="btn btn-primary">
+                Launch Playground
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="section cta-section">
         <div className="container">
           <div className="cta-block reveal">
             <h2 className="section-title">
-              Let's Build Something Together
+              Available For Opportunities
             </h2>
             <p className="section-subtitle" style={{ marginBottom: '2rem' }}>
-              I'm always open to new opportunities and collaborations.
+              I'm actively seeking roles as an AI Engineer, Software Developer, or Full-Stack MERN Developer. Let's build something exceptional!
             </p>
-            <Link to="/contact" className="btn btn-primary">
-              Get In Touch
-            </Link>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+              <Link to="/contact" className="btn btn-primary">
+                Hire Me / Get In Touch
+              </Link>
+              <Link to="/resume" className="btn btn-outline">
+                Download Resume
+              </Link>
+            </div>
           </div>
         </div>
       </section>

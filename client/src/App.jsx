@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Loader from './components/Loader';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
+import Playground from './pages/Playground';
 import Education from './pages/Education';
 import Leadership from './pages/Leadership';
 import Resume from './pages/Resume';
@@ -31,6 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/playground" element={<Playground />} />
           <Route path="/education" element={<Education />} />
           <Route path="/leadership" element={<Leadership />} />
           <Route path="/resume" element={<Resume />} />
