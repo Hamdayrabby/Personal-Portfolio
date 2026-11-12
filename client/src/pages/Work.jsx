@@ -37,8 +37,13 @@ export default function Work() {
             <span className="count">{projects.length} entries</span>
           </div>
           <div className="work-list">
-            {projects.map((item) => (
-              <WorkRow key={item.slug} item={item} meta={[item.org, item.period]} />
+            {projects.map((item, i) => (
+              <WorkRow
+                key={item.slug}
+                item={item}
+                index={i}
+                meta={[item.org, item.period]}
+              />
             ))}
           </div>
         </div>
@@ -51,8 +56,13 @@ export default function Work() {
             <span className="count">{research.length} entries</span>
           </div>
           <div className="work-list">
-            {research.map((item) => (
-              <WorkRow key={item.slug} item={item} meta={[item.venue, item.role]} />
+            {research.map((item, i) => (
+              <WorkRow
+                key={item.slug}
+                item={item}
+                index={i}
+                meta={[item.venue, item.role]}
+              />
             ))}
           </div>
         </div>
@@ -66,8 +76,12 @@ export default function Work() {
           </div>
 
           <div className="archive-list">
-            {archive.map((item) => (
-              <article className="archive-item reveal" key={item.title}>
+            {archive.map((item, i) => (
+              <article
+                className="archive-item reveal"
+                style={{ '--reveal-delay': `${Math.min(i * 60, 240)}ms` }}
+                key={item.title}
+              >
                 <div>
                   <h3 className="archive-title">{item.title}</h3>
                   <p className="archive-org">

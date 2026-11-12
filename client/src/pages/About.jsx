@@ -69,8 +69,12 @@ export default function About() {
             <h2>Experience</h2>
           </div>
           <div className="timeline">
-            {experience.map((job) => (
-              <article className="tl-item reveal" key={`${job.org}-${job.period}`}>
+            {experience.map((job, i) => (
+              <article
+                className="tl-item reveal"
+                style={{ '--reveal-delay': `${Math.min(i * 60, 240)}ms` }}
+                key={`${job.org}-${job.period}`}
+              >
                 <p className="tl-date">{job.period}</p>
                 <div>
                   <h3 className="tl-role">{job.role}</h3>

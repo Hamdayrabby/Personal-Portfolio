@@ -77,8 +77,12 @@ export default function CaseStudy() {
         <section className="case-section">
           <h2>Decisions</h2>
           <div className="decisions">
-            {item.decisions.map((d) => (
-              <div className="decision reveal" key={d.title}>
+            {item.decisions.map((d, i) => (
+              <div
+                className="decision reveal"
+                style={{ '--reveal-delay': `${Math.min(i * 60, 240)}ms` }}
+                key={d.title}
+              >
                 <div>
                   <h3>{d.title}</h3>
                   <p>{d.detail}</p>
@@ -137,7 +141,7 @@ export default function CaseStudy() {
             {prev && (
               <Link to={`/work/${prev.slug}`}>
                 <span className="dir">← Previous</span>
-                <span>{prev.title}</span>
+                <span className="case-nav-title">{prev.title}</span>
               </Link>
             )}
           </div>
@@ -145,7 +149,7 @@ export default function CaseStudy() {
             {next && (
               <Link to={`/work/${next.slug}`} className="next">
                 <span className="dir">Next →</span>
-                <span>{next.title}</span>
+                <span className="case-nav-title">{next.title}</span>
               </Link>
             )}
           </div>

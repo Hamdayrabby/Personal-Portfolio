@@ -1,0 +1,79 @@
+## Design System: Hamday Portfolio
+
+### Design Dials
+- **Variance:** 5/10 — Balanced / Modern
+- **Motion:** 3/10 — Subtle
+- **Density:** 4/10 — Standard
+
+### Pattern
+- **Name:** Scroll-Triggered Storytelling
+- **Conversion Focus:** Keep the narrative understandable without scroll-driven effects. Use progress indicator. Mobile: simplify animations. Keep DOM reading order complete; disable parallax and scroll-scrub under reduced motion. Pause scroll animation when offscreen or hidden and render each chapter in its final readable state under reduced motion.
+- **CTA Placement:** End of each chapter (mini) + Final climax CTA
+- **Color Strategy:** Progressive reveal. Each chapter has distinct color. Building intensity.
+- **Sections:** Intro hook > Chapter 1 (problem) > Chapter 2 (journey) > Chapter 3 (solution) > Climax CTA
+
+### Style
+- **Name:** Liquid Glass
+- **Mode Support:** Light supported | Dark supported
+- **Keywords:** dynamic material, optical glass, translucency, lensing, refraction, fluid morphing, system navigation
+- **Best For:** Apple-platform navigation, controls, and system-aligned app chrome
+- **Performance:** cost:moderate|drivers:animation,blur | **Accessibility:** risk:conditional|requires:contrast-text-4.5,keyboard,visible-focus,reduced-motion
+
+### Colors
+| Role | Hex | CSS Variable |
+|------|-----|--------------|
+| Primary | `#1C1917` | `--color-primary` |
+| On Primary | `#FFFFFF` | `--color-on-primary` |
+| Secondary | `#44403C` | `--color-secondary` |
+| On Secondary | `#FFFFFF` | `--color-on-secondary` |
+| Accent/CTA | `#A16207` | `--color-accent` |
+| On Accent/CTA | `#FFFFFF` | `--color-on-accent` |
+| Background | `#FAFAF9` | `--color-background` |
+| Foreground | `#0C0A09` | `--color-foreground` |
+| Card | `#FFFFFF` | `--color-card` |
+| Card Foreground | `#0C0A09` | `--color-card-foreground` |
+| Muted | `#E8ECF0` | `--color-muted` |
+| Muted Foreground | `#475569` | `--color-muted-foreground` |
+| Border | `#D6D3D1` | `--color-border` |
+| Destructive | `#DC2626` | `--color-destructive` |
+| On Destructive | `#FFFFFF` | `--color-on-destructive` |
+| Ring | `#1C1917` | `--color-ring` |
+
+*Notes: Premium black + gold accent [Accent adjusted from #CA8A04]*
+
+### Typography
+- **Heading:** Cormorant
+- **Body:** Montserrat
+- **Mood:** luxury, high-end, fashion, elegant, refined, premium
+- **Best For:** Fashion brands, luxury e-commerce, jewelry, high-end services
+- **Google Fonts:** https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap
+- **CSS Import:**
+```css
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+```
+
+### Key Effects
+Lensing and refraction, adaptive translucency, and fluid morph transitions aligned to Apple platform behavior
+
+### Motion
+**Scroll Reveal** (Subtle) — Trigger: scroll (viewport enter) | Duration: 300-400ms | Easing: `power1.out`
+```js
+gsap.from(el, { opacity: 0, y: 12, duration: 0.35, ease: 'power1.out', scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none reverse' } });
+```
+*Framework notes: Requires the ScrollTrigger plugin registered once via gsap.registerPlugin(ScrollTrigger); Use matchMedia('(prefers-reduced-motion: reduce)') to skip non-essential motion and render the final state immediately*
+- ✅ Keep the y offset small (8-16px) so it reads as a fade, not a slide
+- ❌ Don't reveal below-the-fold content needed for SEO/crawlers as invisible-by-default without a no-JS fallback
+
+### Avoid (Anti-patterns)
+- Cheap visuals
+- Fast animations
+
+### Pre-Delivery Checklist
+- [ ] No emojis as icons (use SVG: Heroicons/Lucide)
+- [ ] cursor-pointer on all clickable elements
+- [ ] Hover states with smooth transitions (150-300ms)
+- [ ] Light mode: text contrast 4.5:1 minimum
+- [ ] Focus states visible for keyboard nav
+- [ ] prefers-reduced-motion respected
+- [ ] Responsive: 375px, 768px, 1024px, 1440px
+

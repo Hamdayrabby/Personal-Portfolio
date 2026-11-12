@@ -23,9 +23,9 @@ export const profile = {
   // Hero copy. Short, declarative, no adjectives. **text** renders italic.
   lede: "I build production AI systems — real-time voice, retrieval, and **agent infrastructure**.",
   intro:
-    "Most recently at Hype Corporation, where I worked across six products and owned voice infrastructure, multi-tenant auth, and LLM tooling. Before that, research on Bengali misinformation detection and an interpretable churn model deployed as a live application.",
+    "Most recently at Hype Corporation, where I owned voice infrastructure, multi-tenant auth, and LLM tooling across six products. Before that, research on Bengali misinformation detection and an interpretable churn model running as a live application.",
   bio: [
-    "I care about the parts of AI systems that decide whether they survive contact with production: who is allowed to call what, what happens when the model is wrong, and how a request gets from a browser microphone to a model and back without leaking a session.",
+    "I work on the parts of an AI system that decide whether it survives production: who is allowed to call what, what happens when the model is wrong, and how a request travels from a browser microphone to a model and back without leaking a session.",
     "That has meant collapsing duplicate realtime gateways, replacing trusted client state with signed server state, making payment capture exactly-once, and building export pipelines whose output is validated against the format it claims to be.",
     "My background is a Computer Science degree from HSTU, competitive programming, and two research projects — one on synthetic misinformation, one an interpretable ensemble presented at an IEEE symposium.",
   ],
@@ -38,11 +38,11 @@ export const experience = [
     location: "Dhaka, Bangladesh",
     period: "Jul 2026 — Nov 2026",
     summary:
-      "Six production products spanning realtime voice, AI video editing, LLM tooling, and commerce. Worked across the stack, with ownership concentrated in voice infrastructure, authentication and tenant isolation, and data-integrity fixes.",
+      "Six production products across realtime voice, AI video editing, LLM tooling, and commerce. Scope ran the full stack; ownership concentrated in voice infrastructure, authentication and tenant isolation, and data-integrity fixes.",
     highlights: [
-      "Led the voice gateway consolidation and edge-verified role enforcement on the company's voice sales agent.",
-      "Built the NLE export pipeline and the three-layer engineering harness used across the video editor.",
-      "Shipped group-chat sharing and session-scoped semantic memory on a LibreChat-based platform.",
+      "Consolidated the voice agent's realtime gateways into one proxy and moved role enforcement to the edge.",
+      "Built the video editor's NLE export pipeline and the three-layer engineering harness behind it.",
+      "Added group-chat sharing and session-scoped semantic memory to the LibreChat-based platform.",
     ],
     products: ["ORA", "Adcut", "manygpt-v2", "Axo", "ai-creators-bd", "altName"],
   },
@@ -120,7 +120,7 @@ export const projects = [
     visibility: "public",
     featured: true,
     summary:
-      "A provider-agnostic agentic coding tool: bring any model, run work in isolation, coordinate multiple agent runtimes.",
+      "A provider-agnostic agentic coding tool — swappable models, isolated execution, and orchestration across several agent runtimes.",
     context:
       "Most coding agents assume one provider and one process. Hubble treats the model as a swappable dependency and the runtime as a sandbox problem — the interesting part is not the loop, it is everything around it.",
     decisions: [
@@ -370,7 +370,7 @@ export const projects = [
       {
         title: "Semantic matching plus ATS heuristics",
         detail:
-          "Semantic similarity against the posting is combined with ATS-style structural checks to produce both a score and specific, actionable edits rather than a single opaque number.",
+          "Semantic similarity against the posting is combined with ATS-style structural checks, so the output is a score plus specific edits a candidate can apply rather than one opaque number.",
       },
       {
         title: "JWT auth with role-based access",
@@ -397,7 +397,7 @@ export const research = [
     summary:
       "Testing whether Bengali fake-news detectors survive text that has been laundered by an LLM.",
     context:
-      "Detection benchmarks assume fake news is written by humans. If a model can rewrite a fake article to read like real reporting without changing its claims, does the detector still catch it — and does the dataset leak the answer through style instead of substance?",
+      "Detection benchmarks assume fake news is written by humans. If a model can rewrite a fake article to read like real reporting without changing its claims, the detector still has to catch it — and the dataset must not leak the answer through style instead of substance.",
     decisions: [
       {
         title: "Constrained generation to style transfer only",
@@ -421,7 +421,7 @@ export const research = [
       },
     ],
     outcome:
-      "A clean corpus and an evaluation that measures robustness to laundering rather than robustness to formatting.",
+      "A clean corpus, and an evaluation that scores resistance to laundering rather than sensitivity to formatting.",
     stack: ["Python", "Transformers", "LLM prompting", "Bengali NLP"],
   },
   {

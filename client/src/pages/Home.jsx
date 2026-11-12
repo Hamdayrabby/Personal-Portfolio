@@ -4,6 +4,8 @@ import useScrollReveal from '../hooks/useScrollReveal';
 import RichText from '../components/RichText';
 import WorkRow from '../components/WorkRow';
 
+const stagger = (i) => ({ '--reveal-delay': `${Math.min(i * 60, 240)}ms` });
+
 export default function Home() {
   useScrollReveal();
 
@@ -11,29 +13,28 @@ export default function Home() {
 
   return (
     <div>
-      {/* Hero */}
+      {/* Hero — magazine opening spread: lede column + portrait column */}
       <section className="hero">
-        <div className="container">
-          <p className="eyebrow">
-            {profile.role} · {profile.location}
-          </p>
+        <div className="container hero-grid">
+          <div className="hero-copy">
+            <p className="eyebrow">
+              {profile.role} · {profile.location}
+            </p>
 
-          <h1 className="lede" style={{ marginTop: '1.25rem' }}>
-            <RichText text={profile.lede} />
-          </h1>
+            <h1 className="lede" style={{ marginTop: '1.5rem' }}>
+              <RichText text={profile.lede} />
+            </h1>
 
-          <div className="hero-meta">
-            <span>{profile.availability}</span>
-            <span className="dot" aria-hidden="true">
-              /
-            </span>
-            <span>Most recently at Hype Corporation</span>
-          </div>
-
-          <div className="hero-body">
-            <div>
-              <p>{profile.intro}</p>
+            <div className="hero-meta">
+              <span>{profile.availability}</span>
+              <span className="dot" aria-hidden="true">
+                ·
+              </span>
+              <span>Most recently at Hype Corporation</span>
             </div>
+
+            <p className="hero-intro">{profile.intro}</p>
+
             <div className="hero-links">
               <Link to="/work" className="arrow-link">
                 Selected work <span className="arrow">→</span>
@@ -46,6 +47,17 @@ export default function Home() {
               </a>
             </div>
           </div>
+
+          <figure className="hero-portrait reveal">
+            <img
+              src="/assets/profile.png"
+              alt={`Portrait of ${profile.name}`}
+              width="1024"
+              height="1280"
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
         </div>
       </section>
 
@@ -60,10 +72,11 @@ export default function Home() {
           </div>
 
           <div className="work-list">
-            {featured.map((item) => (
+            {featured.map((item, i) => (
               <WorkRow
                 key={item.slug}
                 item={item}
+                index={i}
                 meta={[item.org, item.period]}
               />
             ))}
@@ -85,8 +98,8 @@ export default function Home() {
           </div>
 
           <div className="timeline">
-            {experience.map((job) => (
-              <article className="tl-item reveal" key={`${job.org}-${job.period}`}>
+            {experience.map((job, i) => (
+              <article className="tl-item reveal" style={stagger(i)} key={`${job.org}-${job.period}`}>
                 <p className="tl-date">{job.period}</p>
                 <div>
                   <h3 className="tl-role">{job.role}</h3>
@@ -122,10 +135,11 @@ export default function Home() {
           </div>
 
           <div className="work-list">
-            {research.map((item) => (
+            {research.map((item, i) => (
               <WorkRow
                 key={item.slug}
                 item={item}
+                index={i}
                 meta={[item.venue, item.role]}
               />
             ))}
@@ -141,8 +155,8 @@ export default function Home() {
           </div>
 
           <dl className="skill-table">
-            {skills.map((group) => (
-              <div className="skill-row reveal" key={group.label}>
+            {skills.map((group, i) => (
+              <div className="skill-row reveal" style={stagger(i)} key={group.label}>
                 <dt>{group.label}</dt>
                 <dd>
                   {group.items.map((item) => (
@@ -157,7 +171,7 @@ export default function Home() {
 
       {/* Contact */}
       <section className="section" id="contact-cta">
-        <div className="container-narrow">
+        <div className="container">
           <h2
             className="display"
             style={{ fontSize: 'var(--step-3)', marginBottom: '1.25rem' }}
@@ -168,7 +182,7 @@ export default function Home() {
             style={{
               fontSize: 'var(--step-1)',
               color: 'var(--ink-soft)',
-              lineHeight: 1.7,
+              lineHeight: 1.75,
               marginBottom: '2rem',
               maxWidth: '56ch',
             }}
