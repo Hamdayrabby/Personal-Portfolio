@@ -10,7 +10,7 @@ export default function WorkRow({ item, meta, index = 0 }) {
 
   return (
     <Link
-      to={`/work/${item.slug}`}
+      to={`/projects/${item.slug}`}
       className="work-row reveal"
       style={{ '--reveal-delay': `${Math.min(index * 60, 240)}ms` }}
     >

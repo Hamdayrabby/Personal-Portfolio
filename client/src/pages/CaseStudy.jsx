@@ -21,8 +21,8 @@ export default function CaseStudy() {
           That project doesn&rsquo;t exist. It may have been renamed.
         </p>
         <p style={{ marginTop: '2rem' }}>
-          <Link to="/work" className="arrow-link">
-            Back to work <span className="arrow">→</span>
+          <Link to="/projects" className="arrow-link">
+            All projects <span className="arrow">→</span>
           </Link>
         </p>
       </div>
@@ -48,8 +48,8 @@ export default function CaseStudy() {
   return (
     <article className="case">
       <div className="container">
-        <Link to="/work" className="back-link">
-          <span aria-hidden="true">←</span> All work
+        <Link to="/projects" className="back-link">
+          <span aria-hidden="true">←</span> All projects
         </Link>
 
         <header>
@@ -139,7 +139,7 @@ export default function CaseStudy() {
         <nav className="case-nav" aria-label="More work">
           <div>
             {prev && (
-              <Link to={`/work/${prev.slug}`}>
+              <Link to={`/projects/${prev.slug}`}>
                 <span className="dir">← Previous</span>
                 <span className="case-nav-title">{prev.title}</span>
               </Link>
@@ -147,7 +147,7 @@ export default function CaseStudy() {
           </div>
           <div>
             {next && (
-              <Link to={`/work/${next.slug}`} className="next">
+              <Link to={`/projects/${next.slug}`} className="next">
                 <span className="dir">Next →</span>
                 <span className="case-nav-title">{next.title}</span>
               </Link>

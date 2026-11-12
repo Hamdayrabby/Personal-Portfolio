@@ -60,6 +60,7 @@ export const experience = [
 export const projects = [
   {
     slug: "ora",
+    kind: "product",
     title: "ORA",
     subtitle: "Voice-first AI sales agent",
     org: "Hype Corporation",
@@ -112,6 +113,7 @@ export const projects = [
   },
   {
     slug: "hubble",
+    kind: "product",
     title: "Hubble CLI",
     subtitle: "Agentic coding CLI",
     org: "Independent",
@@ -161,6 +163,7 @@ export const projects = [
   },
   {
     slug: "anoura",
+    kind: "product",
     title: "Anoura",
     subtitle: "Commerce platform and ERP",
     org: "Independent product",
@@ -207,6 +210,7 @@ export const projects = [
   },
   {
     slug: "adcut",
+    kind: "product",
     title: "Adcut",
     subtitle: "AI video editor with frame-accurate export",
     org: "Hype Corporation",
@@ -254,6 +258,7 @@ export const projects = [
   },
   {
     slug: "axo",
+    kind: "product",
     title: "Axo",
     subtitle: "Deterministic prompt compiler for AI builders",
     org: "PromptNext",
@@ -284,6 +289,7 @@ export const projects = [
   },
   {
     slug: "manygpt",
+    kind: "product",
     title: "manygpt-v2",
     subtitle: "Group chat and semantic memory for an LLM platform",
     org: "Hype Corporation",
@@ -320,6 +326,7 @@ export const projects = [
   },
   {
     slug: "quorum",
+    kind: "product",
     title: "Quorum",
     subtitle: "Multi-agent debate with cited evidence",
     org: "Advanced AI coursework",
@@ -350,6 +357,7 @@ export const projects = [
   },
   {
     slug: "knotic-sense",
+    kind: "product",
     title: "Knotic-Sense",
     subtitle: "Job-search tracker with ATS scoring",
     org: "Independent",
@@ -391,6 +399,7 @@ export const projects = [
 export const research = [
   {
     slug: "bangla-misinformation",
+    kind: "research",
     title: "Synthetic Evolution and Adversarial Resilience in Bangla Fake News Detection",
     venue: "M.Sc. research — ongoing",
     role: "Researcher and primary engineer",
@@ -426,6 +435,7 @@ export const research = [
   },
   {
     slug: "telecom-churn",
+    kind: "research",
     title: "An Interpretable Ensemble for Real-Time Telecom Churn Prediction",
     venue: "Undergraduate thesis · IEEE CS BDC Summer Symposium 2025",
     role: "Researcher and engineer",

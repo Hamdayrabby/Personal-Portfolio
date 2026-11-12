@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { profile } from '../data/portfolioData';
 
 const links = [
-  { to: '/work', label: 'Work' },
+  { to: '/projects', label: 'Projects' },
   { to: '/about', label: 'About' },
   { to: '/resume', label: 'Resume' },
   { to: '/contact', label: 'Contact' },

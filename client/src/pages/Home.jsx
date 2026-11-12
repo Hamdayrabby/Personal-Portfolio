@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { profile, projects, experience, research, skills } from '../data/portfolioData';
 import useScrollReveal from '../hooks/useScrollReveal';
-import RichText from '../components/RichText';
+import ScrambleText from '../components/ScrambleText';
+import PixelMosaic from '../components/PixelMosaic';
 import WorkRow from '../components/WorkRow';
 
 const stagger = (i) => ({ '--reveal-delay': `${Math.min(i * 60, 240)}ms` });
@@ -13,16 +14,17 @@ export default function Home() {
 
   return (
     <div>
-      {/* Hero — magazine opening spread: lede column + portrait column */}
+      {/* Hero — retro opening screen: lede column + pixel portrait column */}
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
             <p className="eyebrow">
               {profile.role} · {profile.location}
+              <span className="blink-block" aria-hidden="true" />
             </p>
 
             <h1 className="lede" style={{ marginTop: '1.5rem' }}>
-              <RichText text={profile.lede} />
+              <ScrambleText text={profile.lede} />
             </h1>
 
             <div className="hero-meta">
@@ -36,7 +38,7 @@ export default function Home() {
             <p className="hero-intro">{profile.intro}</p>
 
             <div className="hero-links">
-              <Link to="/work" className="arrow-link">
+              <Link to="/projects" className="arrow-link">
                 Selected work <span className="arrow">→</span>
               </Link>
               <Link to="/resume" className="arrow-link">
@@ -50,16 +52,18 @@ export default function Home() {
 
           <figure className="hero-portrait reveal">
             <img
-              src="/assets/profile.png"
-              alt={`Portrait of ${profile.name}`}
-              width="1024"
-              height="1280"
+              src="/assets/profile-pixel.png"
+              alt={`Pixel portrait of ${profile.name}`}
+              width="576"
+              height="720"
               loading="eager"
               decoding="async"
             />
           </figure>
         </div>
       </section>
+
+      <PixelMosaic />
 
       {/* Selected work */}
       <section className="section" id="work">
@@ -83,7 +87,7 @@ export default function Home() {
           </div>
 
           <p style={{ marginTop: '2rem' }}>
-            <Link to="/work" className="arrow-link">
+            <Link to="/projects" className="arrow-link">
               All projects and archive <span className="arrow">→</span>
             </Link>
           </p>

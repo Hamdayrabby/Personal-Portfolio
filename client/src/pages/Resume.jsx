@@ -37,7 +37,7 @@ export default function Resume() {
         <p style={{ color: 'var(--muted)', marginTop: '0.35rem' }}>
           {profile.role} · {profile.location}
         </p>
-        <p className="mono" style={{ fontSize: '0.8rem', marginTop: '0.75rem', color: 'var(--muted)' }}>
+        <p className="resume-contact">
           <a href={`mailto:${profile.email}`} className="link">
             {profile.email}
           </a>{' '}
