@@ -8,6 +8,7 @@ import {
   leadership,
 } from '../data/portfolioData';
 import useScrollReveal from '../hooks/useScrollReveal';
+import PixelImage from '../components/PixelImage';
 
 export default function About() {
   useScrollReveal();
@@ -28,13 +29,12 @@ export default function About() {
           <div className="hero-body" style={{ borderTop: '1px solid var(--rule)' }}>
             <div className="prose">
               <figure className="about-avatar">
-                <img
+                <PixelImage
                   src="/assets/profile-pixel.png"
                   alt={`Pixel-art portrait of ${profile.name}`}
                   width="576"
                   height="720"
-                  loading="eager"
-                  decoding="async"
+                  eager
                 />
               </figure>
               {profile.bio.map((para) => (

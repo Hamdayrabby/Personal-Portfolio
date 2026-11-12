@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { profile, projects, experience, research, skills } from '../data/portfolioData';
 import useScrollReveal from '../hooks/useScrollReveal';
 import RoleTicker from '../components/RoleTicker';
+import PixelImage from '../components/PixelImage';
 import PixelMosaic from '../components/PixelMosaic';
 import WorkRow from '../components/WorkRow';
 import WorkCard from '../components/WorkCard';
@@ -117,13 +118,12 @@ export default function Home() {
           </div>
 
           <figure className="hero-portrait reveal">
-            <img
+            <PixelImage
               src="/assets/profile.png"
               alt={`Portrait of ${profile.name}`}
               width="1024"
               height="1280"
-              loading="eager"
-              decoding="async"
+              eager
             />
           </figure>
         </div>
