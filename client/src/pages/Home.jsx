@@ -4,8 +4,14 @@ import useScrollReveal from '../hooks/useScrollReveal';
 import RoleTicker from '../components/RoleTicker';
 import PixelMosaic from '../components/PixelMosaic';
 import WorkRow from '../components/WorkRow';
+import WorkCard from '../components/WorkCard';
 
 const stagger = (i) => ({ '--reveal-delay': `${Math.min(i * 60, 240)}ms` });
+
+// Asymmetric column spans on the 6-column grid — 4 = large, 3 = medium,
+// 2 = small. One large card per pair of rows keeps the layout unbalanced
+// on purpose.
+const SPANS = [4, 2, 3, 3, 2, 4, 3, 3];
 
 /* 8-bit icon strip: code, research, AI — pure rect SVGs, gold, decorative. */
 function PixelIcons() {
@@ -135,13 +141,13 @@ export default function Home() {
             </span>
           </div>
 
-          <div className="work-list">
+          <div className="work-grid">
             {featured.map((item, i) => (
-              <WorkRow
+              <WorkCard
                 key={item.slug}
                 item={item}
+                span={SPANS[i % SPANS.length]}
                 index={i}
-                meta={[item.org, item.period]}
               />
             ))}
           </div>
