@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import portfolioData from '../data/portfolioData';
+import { profile } from '../data/portfolioData';
 
-// Initialize EmailJS with your public key
-emailjs.init("ANG8Bxt75tbHk2y2U");
+emailjs.init('ANG8Bxt75tbHk2y2U');
+
+const SERVICE_ID = 'service_okborg6';
+const TEMPLATE_ID = 'template_783gw16';
 
 export default function Contact() {
-  const { personal } = portfolioData;
-  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
@@ -20,163 +22,135 @@ export default function Contact() {
     setLoading(true);
     setStatus(null);
 
-    const templateParams = {
+    emailjs
+      .send(SERVICE_ID, TEMPLATE_ID, {
         from_name: form.name,
         from_email: form.email,
-        phone_number: form.phone,
-        message: form.message
-    };
-
-    emailjs.send('service_okborg6', 'template_783gw16', templateParams)
+        message: form.message,
+      })
       .then(() => {
-        setStatus({ type: 'success', message: 'Message sent successfully!' });
-        setForm({ name: '', email: '', phone: '', message: '' });
+        setStatus({ type: 'success', message: 'Sent. I’ll reply to the address you gave.' });
+        setForm({ name: '', email: '', message: '' });
       })
       .catch((error) => {
-        console.error('EmailJS Error:', error);
-        setStatus({ type: 'error', message: 'Failed to send message. Please try again later.' });
+        console.error('EmailJS error:', error);
+        setStatus({
+          type: 'error',
+          message: `Sending failed. Email ${profile.email} directly instead.`,
+        });
       })
-      .finally(() => {
-        setLoading(false);
-      });
+      .finally(() => setLoading(false));
   };
 
   return (
-    <div className="page-transition" style={{ paddingTop: 'var(--nav-height)' }}>
+    <div>
+      <section className="hero" style={{ paddingBottom: 0 }}>
+        <div className="container">
+          <p className="eyebrow">Contact</p>
+          <h1 className="lede" style={{ marginTop: '1.25rem', maxWidth: '18ch' }}>
+            Write to me about a role, a system, or a decision you&rsquo;d have made differently.
+          </h1>
+        </div>
+      </section>
+
       <section className="section">
         <div className="container">
-          <div className="section-header">
-            <span className="section-label">// Say Hello</span>
-            <h2 className="section-title">Get In Touch</h2>
-            <p className="section-subtitle">
-              Have a project in mind or want to discuss an opportunity? Let's connect!
-            </p>
-          </div>
-
           <div className="contact-grid">
-            {/* Contact Info */}
-            <div>
-              <div className="contact-info-list">
-                <div className="glass-card contact-info-item">
-                  <div className="icon">📍</div>
-                  <div>
-                    <div className="label">Location</div>
-                    <div className="value">{personal.location}</div>
-                  </div>
-                </div>
-                <div className="glass-card contact-info-item">
-                  <div className="icon">✉</div>
-                  <div>
-                    <div className="label">Email</div>
-                    <div className="value">{personal.email}</div>
-                  </div>
-                </div>
-                <div className="glass-card contact-info-item">
-                  <div className="icon">📱</div>
-                  <div>
-                    <div className="label">Phone</div>
-                    <div className="value">{personal.phone}</div>
-                  </div>
-                </div>
+            <dl className="contact-direct">
+              <div className="contact-item">
+                <dt>Email</dt>
+                <dd>
+                  <a href={`mailto:${profile.email}`} className="link">
+                    {profile.email}
+                  </a>
+                </dd>
+              </div>
+              <div className="contact-item">
+                <dt>Based in</dt>
+                <dd>{profile.location}</dd>
+              </div>
+              <div className="contact-item">
+                <dt>Elsewhere</dt>
+                <dd style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <a
+                    href={profile.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link"
+                  >
+                    LinkedIn
+                  </a>
+                  <a
+                    href={profile.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link"
+                  >
+                    GitHub
+                  </a>
+                  <a
+                    href={profile.codeforces}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link"
+                  >
+                    Codeforces
+                  </a>
+                </dd>
+              </div>
+              <div className="contact-item">
+                <dt>Status</dt>
+                <dd style={{ fontSize: 'var(--step-0)', color: 'var(--muted)' }}>
+                  {profile.availability}
+                </dd>
+              </div>
+            </dl>
+
+            <form className="form" onSubmit={handleSubmit}>
+              <div className="field">
+                <label htmlFor="contact-name">Name</label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  value={form.name}
+                  onChange={handleChange}
+                  autoComplete="name"
+                  required
+                />
               </div>
 
-              <div className="contact-socials" style={{ marginTop: '2rem', paddingLeft: '1rem' }}>
-                <a
-                  href={personal.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link"
-                  title="GitHub"
-                >
-                  ⟨/⟩
-                </a>
-                <a
-                  href={personal.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link"
-                  title="LinkedIn"
-                >
-                  in
-                </a>
-                <a
-                  href={`mailto:${personal.email}`}
-                  className="social-link"
-                  title="Email"
-                >
-                  @
-                </a>
+              <div className="field">
+                <label htmlFor="contact-email">Email</label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  autoComplete="email"
+                  required
+                />
               </div>
-            </div>
 
-            {/* Contact Form */}
-            <div className="glass-card" style={{ padding: '2rem' }}>
-              <form name="contact" className="contact-form" onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    name="name"
-                    className="form-input"
-                    placeholder="Your Name"
-                    value={form.name}
-                    onChange={handleChange}
-                    required
-                    id="contact-name"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="email"
-                    name="email"
-                    className="form-input"
-                    placeholder="Your Email"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                    id="contact-email"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="tel"
-                    name="phone"
-                    className="form-input"
-                    placeholder="Phone (optional)"
-                    value={form.phone}
-                    onChange={handleChange}
-                    id="contact-phone"
-                  />
-                </div>
-                <div className="form-group">
-                  <textarea
-                    name="message"
-                    className="form-textarea"
-                    placeholder="Your Message"
-                    value={form.message}
-                    onChange={handleChange}
-                    required
-                    rows={5}
-                    id="contact-message"
-                  />
-                </div>
+              <div className="field">
+                <label htmlFor="contact-message">Message</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  rows={6}
+                  required
+                />
+              </div>
 
-                {status && (
-                  <div className={`form-status ${status.type}`}>
-                    {status.message}
-                  </div>
-                )}
+              {status && <p className={`form-status ${status.type}`}>{status.message}</p>}
 
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={loading}
-                  id="contact-submit"
-                  style={{ justifyContent: 'center', width: '100%' }}
-                >
-                  {loading ? 'Sending...' : 'Send Message'}
-                </button>
-              </form>
-            </div>
+              <button type="submit" className="submit" disabled={loading}>
+                {loading ? 'Sending…' : 'Send'}
+              </button>
+            </form>
           </div>
         </div>
       </section>

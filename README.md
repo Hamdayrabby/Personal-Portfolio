@@ -1,80 +1,63 @@
-# 🚀Portfolio — Hamday Rabby Hossain
+# Portfolio — Hamday Rabby Hossain
 
-A modern, futuristic portfolio built with the **MERN Stack** (MongoDB, Express.js, React, Node.js) with a cyberpunk-inspired dark theme.
+An editorial, typographic portfolio for an AI engineer. React + Vite, no UI
+framework, no backend.
 
-## ✨ Features
+The site is built around case studies: each major project has a page that
+documents the context, the architectural decisions, the tradeoffs, and the
+outcome — rather than a feature list. Work done inside company codebases is
+described at architecture level with no links and is labelled
+**Private codebase — walkthrough on request**.
 
-- **Futuristic Dark Theme** — Deep space background with neon cyan/purple accents
-- **Interactive Particle Background** — Mouse-reactive floating particles with connecting lines
-- **Glassmorphism UI** — Frosted glass cards with backdrop blur effects
-- **Typewriter Effect** — Animated role cycling on the hero section
-- **Scroll Animations** — Elements reveal on scroll with smooth transitions
-- **Project Filtering** — Filter projects by category (Software / ML & AI)
-- **Timeline Layout** — Experience and education displayed in a timeline
-- **Contact Form** — Connected to Express API, stores messages in MongoDB
-- **Fully Responsive** — Mobile-first design with hamburger navigation
-- **Loading Screen** — Animated loader with gradient progress bar
+## Pages
 
-## 🛠 Tech Stack
+| Route         | Purpose                                                                |
+| ------------- | ---------------------------------------------------------------------- |
+| `/`           | Hero, selected work, experience, research, tools                       |
+| `/work`       | Full index: products, research, and an archive of older builds         |
+| `/work/:slug` | Case study (context → decisions → bugs → outcome)                      |
+| `/about`      | Longer bio, experience, education, recognition, certifications         |
+| `/resume`     | Printable resume (`Print / Save as PDF` uses `window.print()`)         |
+| `/contact`    | Contact form (EmailJS) and direct details                              |
 
-| Layer     | Technologies                          |
-|-----------|---------------------------------------|
-| Frontend  | React, Vite, React Router, Vanilla CSS |
-| Backend   | Express.js, Node.js                   |
-| Database  | MongoDB, Mongoose                     |
-| Fonts     | Space Grotesk, Orbitron, JetBrains Mono |
+## Stack
 
-## 📁 Project Structure
+- React 19 + Vite 8, `react-router-dom` v7 (`BrowserRouter`)
+- Hand-written CSS design system in `client/src/index.css`
+  - Editorial tokens: `Instrument Serif` display, `IBM Plex Sans` body,
+    `IBM Plex Mono` meta; single oxblood accent
+  - Automatic light **and** dark mode via `prefers-color-scheme`
+  - No gradients, glow, glassmorphism, particles, or loading screens
+- Netlify (SPA redirect in `netlify.toml`)
 
-```
-MERN_Portfolio/
-├── client/                # React Frontend (Vite)
-│   ├── src/
-│   │   ├── components/    # Navbar, Footer, Loader, ParticleBackground
-│   │   ├── pages/         # Home, About, Projects, Resume, Contact
-│   │   ├── data/          # Portfolio content data
-│   │   ├── hooks/         # Custom hooks (scroll reveal)
-│   │   ├── App.jsx        # Main app with routing
-│   │   ├── main.jsx       # Entry point
-│   │   └── index.css      # Complete design system
-│   └── index.html
-├── server/                # Express Backend
-│   ├── models/            # Mongoose schemas
-│   ├── routes/            # API routes
-│   ├── server.js          # Express server
-│   └── .env               # Environment variables
-└── README.md
-```
+## Editing content
 
-## 🚀 Getting Started
+All copy lives in `client/src/data/portfolioData.js`:
 
-### Prerequisites
-- Node.js v18+
-- MongoDB (local or Atlas)
+- `profile` — name, links, hero copy (`**text**` renders italic)
+- `experience`, `education`, `awards`, `certifications`
+- `projects` — entries with a case-study page (`featured: true`)
+- `research` — research case studies
+- `archive` — compact rows without a dedicated page
+- `skills`
 
-### Frontend
+Two rules for that file, stated in its header: every claim must be
+substantiated by the repo or code, and company work is described without
+links or internal detail.
+
+## Develop
+
 ```bash
 cd client
 npm install
-npm run dev
+npm run dev      # local dev server
+npm run build    # production build to client/dist
+npm run lint     # eslint
 ```
 
-### Backend
-```bash
-cd server
-npm install
-# Update .env with your MongoDB URI
-node server.js
-```
+## Deployment
 
-## 🎨 Design System
-
-- **Background**: `#050816` (Deep space)
-- **Primary**: `#00f0ff` (Electric cyan)
-- **Secondary**: `#8b5cf6` (Neon purple)
-- **Tertiary**: `#ec4899` (Hot pink)
-- **Glass**: `rgba(255,255,255,0.05)` with backdrop-blur
-
-## 📄 License
+Deploys to Netlify from the repo root (`netlify.toml` sets `base = client`,
+build `npm run build`, publish `dist`). Deployments are manual.
 
 MIT © Hamday Rabby Hossain
