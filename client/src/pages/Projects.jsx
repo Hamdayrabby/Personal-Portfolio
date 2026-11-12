@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { projects, research, featuredOrder } from '../data/portfolioData';
+import { projects, research, archive, featuredOrder } from '../data/portfolioData';
 
 const FILTERS = [
   { key: 'all', label: 'All' },
@@ -92,6 +92,55 @@ export default function Projects() {
               </Link>
             ))}
             {visible.length === 0 && <p>No entries match this filter.</p>}
+          </div>
+        </div>
+      </section>
+
+      {/* Archive — compact entries without case-study pages */}
+      <section className="section">
+        <div className="container">
+          <div className="section-head">
+            <h2>Archive</h2>
+            <span className="count">{archive.length} entries</span>
+          </div>
+
+          <div className="archive-list">
+            {archive.map((item) => (
+              <article className="archive-item" key={item.title}>
+                <div>
+                  <h3 className="archive-title">{item.title}</h3>
+                  <p className="archive-org">
+                    {item.org} · {item.year}
+                  </p>
+                </div>
+                <div>
+                  <p className="archive-summary">{item.summary}</p>
+                  <div className="archive-links">
+                    {item.visibility === 'private' && (
+                      <span className="card-private">Private codebase</span>
+                    )}
+                    {item.links?.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                  <div className="card-tags">
+                    {item.stack.map((tech) => (
+                      <span className="tag" key={tech}>
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>

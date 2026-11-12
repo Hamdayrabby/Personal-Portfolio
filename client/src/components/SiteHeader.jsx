@@ -17,7 +17,6 @@ export default function SiteHeader() {
       <div className="container">
         <Link to="/" className="brand" aria-label={`${profile.name} — home`}>
           {profile.name}
-          <span className="brand-mark">AI Engineer</span>
         </Link>
 
         <button

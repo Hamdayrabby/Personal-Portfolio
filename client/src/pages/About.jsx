@@ -5,6 +5,7 @@ import {
   awards,
   certifications,
   experience,
+  leadership,
 } from '../data/portfolioData';
 import useScrollReveal from '../hooks/useScrollReveal';
 
@@ -120,6 +121,30 @@ export default function About() {
                   <p className="tl-org">
                     {ed.institution} · {ed.location}
                   </p>
+                  {ed.detail && (
+                    <p className="tl-summary" style={{ fontSize: 'var(--step--1)' }}>
+                      {ed.detail}
+                    </p>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head">
+            <h2>Leadership</h2>
+          </div>
+          <div className="timeline">
+            {leadership.map((item) => (
+              <article className="tl-item" key={item.role}>
+                <p className="tl-date">{item.period}</p>
+                <div>
+                  <h3 className="tl-role">{item.role}</h3>
+                  <p className="tl-org">{item.org}</p>
                 </div>
               </article>
             ))}

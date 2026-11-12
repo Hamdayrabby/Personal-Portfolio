@@ -9,7 +9,7 @@
 
 export const profile = {
   name: "Hamday Rabby Hossain",
-  role: "AI Engineer",
+  role: "Software Developer",
   location: "Dhaka, Bangladesh",
   email: "hamdayrabby385@gmail.com",
   phone: "+880 1720 908856",
@@ -35,15 +35,16 @@ export const profile = {
 
 export const experience = [
   {
-    role: "AI Engineer",
+    role: "Junior Software Developer",
     org: "Hype Corporation",
     location: "Dhaka, Bangladesh",
-    period: "Jul 2026 — Nov 2026",
+    period: "Jul 2026 — Present",
     summary:
-      "Six production products across realtime voice, AI video editing, LLM tooling, and commerce. Scope ran the full stack; ownership concentrated in voice infrastructure, authentication and tenant isolation, and data-integrity fixes.",
+      "Joined as a Software Developer Intern (Jul — Sep 2026) and promoted to a full-time junior role in Oct 2026. Contributed to multiple AI-powered SaaS products spanning realtime voice, AI video editing, LLM tooling, and commerce.",
     highlights: [
-      "Consolidated the voice agent's realtime gateways into one proxy and moved role enforcement to the edge.",
-      "Built the video editor's NLE export pipeline and the three-layer engineering harness behind it.",
+      "Designed the ORA Machine API — OAuth 2.0, secret-key auth, per-tenant and per-IP rate limiting — and consolidated the voice agent's realtime gateways behind one authenticated proxy.",
+      "Shipped Adcut's FCPXML, OpenTimelineIO and Premiere XML export behind a CI fidelity gate; built billing and the admin console.",
+      "Built Axo's deterministic DAG package planner and builder-aware prompt compiler with persistent state handoff.",
       "Added group-chat sharing and session-scoped semantic memory to the LibreChat-based platform.",
     ],
     products: ["ORA", "Adcut", "manygpt-v2", "Axo", "ai-creators-bd", "altName"],
@@ -52,9 +53,22 @@ export const experience = [
     role: "Research Assistant",
     org: "Humach Lab",
     location: "Remote",
-    period: "Feb 2026 — Jun 2026",
+    period: "Feb 2026 — Present",
     summary:
-      "Transformer-based NLP research: dataset construction, experiment runs, and evaluation pipelines.",
+      "Bangla fake news detection research: dataset construction, LLM-based synthetic-data pipelines, and detector-robustness evaluation.",
+  },
+];
+
+export const leadership = [
+  {
+    role: "General Secretary",
+    org: "CSE Club of HSTU",
+    period: "2025",
+  },
+  {
+    role: "Publication and IT Secretary",
+    org: "Programmers Arena & CSE Club of HSTU",
+    period: "2022 — 2024",
   },
 ];
 
@@ -66,7 +80,7 @@ export const projects = [
     title: "ORA",
     subtitle: "Voice-first AI sales agent",
     org: "Hype Corporation",
-    role: "AI Engineer",
+    role: "Software Developer",
     period: "Aug 2026 — Nov 2026",
     visibility: "private",
     featured: true,
@@ -216,7 +230,7 @@ export const projects = [
     title: "Adcut",
     subtitle: "AI video editor with frame-accurate export",
     org: "Hype Corporation",
-    role: "AI Engineer",
+    role: "Software Developer",
     period: "Sep 2026 — Nov 2026",
     visibility: "private",
     featured: true,
@@ -295,7 +309,7 @@ export const projects = [
     title: "manygpt-v2",
     subtitle: "Group chat and semantic memory for an LLM platform",
     org: "Hype Corporation",
-    role: "AI Engineer",
+    role: "Software Developer",
     period: "Jul 2026 — Aug 2026",
     visibility: "private",
     featured: true,
@@ -403,8 +417,8 @@ export const research = [
     slug: "bangla-misinformation",
     kind: "research",
     title: "Synthetic Evolution and Adversarial Resilience in Bangla Fake News Detection",
-    venue: "M.Sc. research — ongoing",
-    role: "Researcher and primary engineer",
+    venue: "Research project — Humach Lab · Feb 2026 — Present",
+    role: "Research Assistant",
     summary:
       "Testing whether Bengali fake-news detectors survive text that has been laundered by an LLM.",
     context:
@@ -491,6 +505,15 @@ export const archive = [
     summary:
       "AI brand-name generator. Rewrote admin analytics with period-over-period KPIs and CSV export, added account deactivation with session revocation and OAuth-account detection, and shipped Stripe credit packs in a seven-day sprint.",
     stack: ["Next.js", "Stripe", "Better-Auth"],
+    visibility: "private",
+  },
+  {
+    title: "M.Sc. Thesis — Hybrid Graph-Tabular Fraud Detection",
+    org: "M.Sc. research — HSTU",
+    year: "2026 — ongoing",
+    summary:
+      "Ongoing thesis combining graph-structured features with tabular models for credit card fraud detection.",
+    stack: ["Graph features", "Tabular ML"],
     visibility: "private",
   },
   {
@@ -607,10 +630,18 @@ export const skills = [
 
 export const education = [
   {
-    degree: "BSc in Computer Science and Engineering",
+    degree: "MSc in Computer Science and Engineering",
+    institution: "Hajee Mohammad Danesh Science and Technology University",
+    location: "Dinajpur, Bangladesh",
+    period: "2026 — Present",
+    detail: "Ongoing. Thesis: hybrid graph-tabular credit card fraud detection.",
+  },
+  {
+    degree: "BSc (Engineering) in Computer Science and Engineering",
     institution: "Hajee Mohammad Danesh Science and Technology University",
     location: "Dinajpur, Bangladesh",
     period: "Jan 2020 — Dec 2023",
+    detail: "CGPA 3.399 / 4.00",
   },
 ];
 
@@ -623,10 +654,9 @@ export const awards = [
 ];
 
 export const certifications = [
-  { name: "AWS AI Practitioner Challenge", issuer: "Udacity / Accenture", year: "2026" },
-  { name: "5-Day AI Agents Intensive", issuer: "Kaggle / Google", year: "2025" },
-  { name: "Full Stack Web Development with JavaScript", issuer: "Ostad", year: "2024" },
-  { name: "Database Training — 80 hours", issuer: "EDGE Project", year: "2024" },
+  { name: "AWS AI Practitioner Challenge", issuer: "Udacity", year: "2026" },
+  { name: "5-Day AI Agents Intensive", issuer: "Kaggle — Google", year: "2025" },
+  { name: "Full Stack Web Development (MERN)", issuer: "Ostad", year: "2024 — 25" },
 ];
 
 export const featuredOrder = [

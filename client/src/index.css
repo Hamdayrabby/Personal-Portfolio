@@ -317,6 +317,76 @@ ol {
   color: var(--accent-bright);
 }
 
+/* --- Loader ---------------------------------------------------------------- */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  transition: opacity 0.24s var(--ease);
+}
+
+.loader.is-done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.loader-name {
+  font-family: var(--font-pixel);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  line-height: 1.8;
+  text-align: center;
+}
+
+.loader-bar {
+  display: flex;
+  gap: 6px;
+}
+
+.loader-block {
+  width: 14px;
+  height: 14px;
+  background: #2a2a2a;
+  animation: loader-fill 0.55s steps(1, end) infinite alternate;
+}
+
+@keyframes loader-fill {
+  0%,
+  100% {
+    background: #2a2a2a;
+  }
+  50% {
+    background: var(--accent);
+  }
+}
+
+.loader-label {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.loader-label .role-cursor {
+  width: 0.55em;
+  height: 0.9em;
+}
+
 /* --- Header ---------------------------------------------------------------- */
 
 .site-header {
