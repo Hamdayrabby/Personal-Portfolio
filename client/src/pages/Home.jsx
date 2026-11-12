@@ -1,11 +1,71 @@
 import { Link } from 'react-router-dom';
 import { profile, projects, experience, research, skills } from '../data/portfolioData';
 import useScrollReveal from '../hooks/useScrollReveal';
-import ScrambleText from '../components/ScrambleText';
+import RoleTicker from '../components/RoleTicker';
 import PixelMosaic from '../components/PixelMosaic';
 import WorkRow from '../components/WorkRow';
 
 const stagger = (i) => ({ '--reveal-delay': `${Math.min(i * 60, 240)}ms` });
+
+/* 8-bit icon strip: code, research, AI — pure rect SVGs, gold, decorative. */
+function PixelIcons() {
+  return (
+    <div className="hero-icons" aria-hidden="true">
+      {/* </> code */}
+      <svg viewBox="0 0 10 10" shapeRendering="crispEdges">
+        <rect x="3" y="1" width="1" height="1" />
+        <rect x="2" y="2" width="1" height="1" />
+        <rect x="1" y="3" width="1" height="1" />
+        <rect x="1" y="4" width="1" height="1" />
+        <rect x="1" y="5" width="1" height="1" />
+        <rect x="1" y="6" width="1" height="1" />
+        <rect x="2" y="7" width="1" height="1" />
+        <rect x="3" y="8" width="1" height="1" />
+        <rect x="6" y="1" width="1" height="1" />
+        <rect x="7" y="2" width="1" height="1" />
+        <rect x="8" y="3" width="1" height="1" />
+        <rect x="8" y="4" width="1" height="1" />
+        <rect x="8" y="5" width="1" height="1" />
+        <rect x="8" y="6" width="1" height="1" />
+        <rect x="7" y="7" width="1" height="1" />
+        <rect x="6" y="8" width="1" height="1" />
+        <rect x="4" y="5" width="1" height="1" />
+        <rect x="5" y="4" width="1" height="1" />
+      </svg>
+      {/* flask — research */}
+      <svg viewBox="0 0 10 10" shapeRendering="crispEdges">
+        <rect x="4" y="0" width="2" height="1" />
+        <rect x="4" y="1" width="1" height="1" />
+        <rect x="4" y="2" width="1" height="1" />
+        <rect x="3" y="3" width="2" height="1" />
+        <rect x="2" y="4" width="4" height="1" />
+        <rect x="1" y="5" width="8" height="1" />
+        <rect x="0" y="6" width="10" height="1" />
+        <rect x="0" y="7" width="10" height="1" />
+        <rect x="1" y="8" width="8" height="1" />
+        <rect x="2" y="9" width="6" height="1" />
+        <rect x="4" y="7" width="1" height="2" />
+        <rect x="6" y="7" width="1" height="1" />
+      </svg>
+      {/* chip — AI */}
+      <svg viewBox="0 0 10 10" shapeRendering="crispEdges">
+        <rect x="3" y="3" width="4" height="4" />
+        <rect x="2" y="2" width="1" height="1" />
+        <rect x="7" y="2" width="1" height="1" />
+        <rect x="2" y="7" width="1" height="1" />
+        <rect x="7" y="7" width="1" height="1" />
+        <rect x="4" y="0" width="1" height="2" />
+        <rect x="5" y="0" width="1" height="2" />
+        <rect x="4" y="8" width="1" height="2" />
+        <rect x="5" y="8" width="1" height="2" />
+        <rect x="0" y="4" width="2" height="1" />
+        <rect x="0" y="5" width="2" height="1" />
+        <rect x="8" y="4" width="2" height="1" />
+        <rect x="8" y="5" width="2" height="1" />
+      </svg>
+    </div>
+  );
+}
 
 export default function Home() {
   useScrollReveal();
@@ -14,18 +74,18 @@ export default function Home() {
 
   return (
     <div>
-      {/* Hero — retro opening screen: lede column + pixel portrait column */}
+      {/* Hero — retro title screen: role ticker + real portrait, minimal text */}
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">
-              {profile.role} · {profile.location}
-              <span className="blink-block" aria-hidden="true" />
-            </p>
+            <PixelIcons />
 
-            <h1 className="lede" style={{ marginTop: '1.5rem' }}>
-              <ScrambleText text={profile.lede} />
+            <h1 className="hero-role">
+              <span className="visually-hidden">{profile.name} — </span>
+              <RoleTicker roles={profile.roles} />
             </h1>
+
+            <p className="hero-tagline">I build production AI systems.</p>
 
             <div className="hero-meta">
               <span>{profile.availability}</span>
@@ -35,27 +95,27 @@ export default function Home() {
               <span>Most recently at Hype Corporation</span>
             </div>
 
-            <p className="hero-intro">{profile.intro}</p>
-
-            <div className="hero-links">
-              <Link to="/projects" className="arrow-link">
-                Selected work <span className="arrow">→</span>
+            <div className="hero-ctas">
+              <Link to="/projects" className="pixel-btn">
+                ▶ View Projects
               </Link>
-              <Link to="/resume" className="arrow-link">
-                Resume <span className="arrow">→</span>
-              </Link>
-              <a href={`mailto:${profile.email}`} className="arrow-link">
-                Email <span className="arrow">→</span>
+              <a
+                href={profile.resumePdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pixel-btn pixel-btn-ghost"
+              >
+                Download CV
               </a>
             </div>
           </div>
 
           <figure className="hero-portrait reveal">
             <img
-              src="/assets/profile-pixel.png"
-              alt={`Pixel portrait of ${profile.name}`}
-              width="576"
-              height="720"
+              src="/assets/profile.png"
+              alt={`Portrait of ${profile.name}`}
+              width="1024"
+              height="1280"
               loading="eager"
               decoding="async"
             />

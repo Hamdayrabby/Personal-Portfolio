@@ -508,6 +508,94 @@ ol {
   margin-top: 1.75rem;
 }
 
+/* Pixel icon strip — visual anchors above the role ticker. */
+.hero-icons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.hero-icons svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--accent-gold);
+  shape-rendering: crispEdges;
+}
+
+/* Role ticker — the h1. Retro arcade terminal line. */
+.hero-role {
+  font-family: var(--font-pixel);
+  font-size: clamp(1rem, 1rem + 1.4vw, 1.65rem);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  max-width: 22ch;
+}
+
+.role-prompt {
+  color: var(--accent-gold);
+}
+
+.role-cursor {
+  display: inline-block;
+  width: 0.62em;
+  height: 1em;
+  margin-left: 0.45em;
+  background: var(--accent);
+  vertical-align: text-bottom;
+  animation: blink 1s steps(1, end) infinite;
+}
+
+/* One short statement under the ticker. */
+.hero-tagline {
+  margin-top: 1.5rem;
+  font-size: var(--step-1);
+  font-weight: 600;
+  color: var(--ink-soft);
+  max-width: 40ch;
+}
+
+/* Retro press-start buttons. */
+.pixel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  color: var(--accent-bg-ink, #121212);
+  background: var(--accent);
+  border: 2px solid var(--accent);
+  box-shadow: 4px 4px 0 var(--accent-gold);
+  padding: 0.85em 1.2em;
+  transition: transform 0.12s var(--ease), box-shadow 0.12s var(--ease);
+}
+
+.pixel-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--accent-gold);
+}
+
+.pixel-btn-ghost {
+  color: var(--accent);
+  background: transparent;
+  box-shadow: 4px 4px 0 #2a2a2a;
+}
+
+.pixel-btn-ghost:hover {
+  box-shadow: 2px 2px 0 #2a2a2a;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 2.25rem;
+  align-items: stretch;
+}
+
 .hero-meta .dot {
   color: var(--accent-gold);
 }
@@ -560,10 +648,29 @@ ol {
   width: min(100%, 420px);
 }
 
-.hero-portrait img {
+/* Small pixel avatar used on the About page (keeps the pixel-art asset). */
+.about-avatar {
+  margin: 0 0 2rem;
+  width: 180px;
+}
+
+.about-avatar img {
   width: 100%;
+  height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
+  image-rendering: pixelated;
+  border: 2px solid var(--accent);
+  box-shadow: 6px 6px 0 var(--accent-gold);
+}
+
+.hero-portrait img {
+  width: 100%;
+  height: auto; /* let aspect-ratio win over the width/height attributes */
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  /* Real photograph — the global pixelated rule is for pixel-art assets. */
+  image-rendering: auto;
   border: 2px solid var(--accent);
   box-shadow: 8px 8px 0 var(--accent);
 }

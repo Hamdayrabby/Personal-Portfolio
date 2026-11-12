@@ -17,8 +17,10 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/hamday-rabby-hossain-714990234/",
   codeforces: "https://codeforces.com/profile/hamdayrabby385",
   leetcode: "https://leetcode.com/hamdayrabby385",
-  resumePdf: "", // set to a direct PDF link when one exists
+  resumePdf: "https://drive.google.com/drive/folders/1XoXvKh_4OuX0FQK6tvhTnqsYz42Yz8Kd?usp=sharing",
   availability: "Open to AI engineering and backend roles",
+  // Hero role ticker — animated one after another, in this order.
+  roles: ["Software Developer", "Researcher", "AI Engineer"],
 
   // Hero copy. Short, declarative, no adjectives. **text** renders italic.
   lede: "I build production AI systems — real-time voice, retrieval, and **agent infrastructure**.",
