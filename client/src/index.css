@@ -840,7 +840,7 @@ ol {
 
 .work-card:hover,
 .work-card:focus-visible {
-  border-color: var(--accent);
+  border-color: var(--card-accent, var(--accent));
   box-shadow: 6px 6px 0 var(--accent-gold);
 }
 
@@ -859,6 +859,10 @@ ol {
   flex: 1;
 }
 
+.work-card .card-type {
+  color: var(--card-accent, var(--accent));
+}
+
 .work-card-title {
   font-family: var(--font-display);
   font-weight: 800;
@@ -868,7 +872,7 @@ ol {
 }
 
 .work-card:hover .work-card-title {
-  color: var(--accent);
+  color: var(--card-accent, var(--accent));
 }
 
 .variant-lg .work-card-title {
