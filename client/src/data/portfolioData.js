@@ -290,16 +290,26 @@ export const projects = [
       {
         title: "An implementation-package layer between planning and building",
         detail:
-          "Four stages — package-planner, package-analyzer, package-validator, package-compiler — turn a plan into a graph, check it, then emit build instructions. Node count is bounded between 2 and 8, with cycle detection and topological ordering, so an invalid plan fails at compile time instead of mid-build.",
+          "Four stages — package-planner, package-analyzer, package-validator, package-compiler — turn a plan into a graph, check it, then emit build instructions. Planning and building stay separate concerns, so a drifting plan is caught where it is cheap to catch.",
+      },
+      {
+        title: "Validation that runs before a builder sees anything",
+        detail:
+          "The validator rejects a package deterministically: node count bounded between 2 and 8, cycle detection over the graph, topological ordering of the output. An invalid plan fails at compile time instead of mid-build, where a half-built repository would be the error message.",
       },
       {
         title: "Builder-aware prompt protocol",
         detail:
           "PROJECT_CONTEXT.md and BUILD_STATE.md carry durable state across sessions, and capabilities are gated per target tool — a capability a builder does not have is never emitted into its instructions.",
       },
+      {
+        title: "Persistent state handoff",
+        detail:
+          "BUILD_STATE.md records what has been built and what remains, so a builder picking the project back up reads state from a file instead of re-deriving it from a chat transcript.",
+      },
     ],
     outcome:
-      "Same plan in, same package out. Validation is deterministic and adds no extra LLM cost.",
+      "Same plan in, same package out. The compile step is deterministic — bounds, cycles, ordering — and costs no extra LLM calls, which is what makes re-planning unnecessary rather than just unlikely.",
     stack: ["LLM orchestration", "Prompt compilation", "CLI tooling"],
     links: [],
   },
@@ -358,16 +368,21 @@ export const projects = [
       {
         title: "Staged concurrent pipeline with failure isolation",
         detail:
-          "Seats run concurrently per stage and a seat that fails does not cancel the round — it falls back, including on 429 and 5xx responses, so one rate-limited provider cannot take down the debate.",
+          "Seats run concurrently per stage and a seat that fails does not cancel the round — it falls back, including on 429 and 5xx responses, so one rate-limited provider cannot take down the debate. Isolation is per seat, not global: the worst case is a weaker contribution, never a missing round.",
       },
       {
         title: "A researcher that actually calls a tool",
         detail:
-          "Claims are grounded through Tavily retrieval and carry their citations into the synthesis, so attribution is checkable rather than asserted.",
+          "The research seat grounds its claims through Tavily retrieval before they enter the debate. Whether the model is recalling or retrieving is verifiable from the transcript, not a matter of trust.",
+      },
+      {
+        title: "Citations carried into the synthesis",
+        detail:
+          "Synthesis receives its inputs with sources attached, so a reader can check the attribution behind any claim instead of taking the summary's word for it.",
       },
     ],
     outcome:
-      "A debate that degrades gracefully under provider failure and produces evidence a reader can verify.",
+      "A debate that degrades gracefully under provider failure and produces evidence a reader can verify — the design constraints come from where multi-agent systems actually break: propagation and ungrounded recall.",
     stack: ["Multi-agent orchestration", "LLM tool calling", "Tavily"],
     links: [{ label: "GitHub", href: "https://github.com/Hamdayrabby/Quorum" }],
   },
@@ -392,17 +407,23 @@ export const projects = [
           "Applications move through Applied, Interview and Offer stages with per-stage state, which makes the interesting metrics — conversion, stall, abandonment — derivable instead of guessed.",
       },
       {
-        title: "Semantic matching plus ATS heuristics",
+        title: "Semantic matching and ATS checks answer different questions",
         detail:
-          "Semantic similarity against the posting is combined with ATS-style structural checks, so the output is a score plus specific edits a candidate can apply rather than one opaque number.",
+          "Semantic similarity against the posting asks whether the résumé is about this job; ATS-style structural checks ask whether it presents the way a screener expects. Combining both produces a score plus specific edits a candidate can apply rather than one opaque number.",
       },
       {
         title: "JWT auth with role-based access",
         detail:
-          "REST endpoints authenticate with JWT and authorize by role, so user data is scoped server-side.",
+          "REST endpoints authenticate with JWT and authorize by role, so user data is scoped server-side and one account's pipeline is never readable through another's session.",
+      },
+      {
+        title: "Solo-project operations kept boring",
+        detail:
+          "Express plus MongoDB Atlas keeps the operational surface at zero — no servers to patch while the product work is the point, and the deployment target stays a single Vercel project.",
       },
     ],
-    outcome: "Live in production, 28 commits, used as a real tracker rather than a demo.",
+    outcome:
+      "Live in production since early 2026, 28 commits, used as a real tracker rather than a demo — which is also why the auth and data-scoping decisions above are not optional extras.",
     stack: ["React", "Vite", "Express", "MongoDB Atlas", "Gemini", "Tailwind CSS"],
     links: [
       { label: "Live", href: "https://knotic-sense.vercel.app/" },

@@ -174,7 +174,7 @@ export default function WorkCard({ item, span, index }) {
         <p className="card-type">{item.kind === 'research' ? 'Research' : 'Product'}</p>
         <h3 className="work-card-title">{item.title}</h3>
         <p className="work-card-sub">{item.subtitle || item.venue}</p>
-        {variant !== 'sm' && <p className="work-card-summary">{item.summary}</p>}
+        <p className="work-card-summary">{item.summary}</p>
         {item.visibility === 'private' && <p className="card-private">Private codebase</p>}
         {variant === 'lg' && (
           <div className="card-tags">
