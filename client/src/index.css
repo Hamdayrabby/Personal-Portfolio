@@ -359,17 +359,15 @@ ol {
   width: 14px;
   height: 14px;
   background: #2a2a2a;
-  animation: loader-fill 0.55s steps(1, end) infinite alternate;
 }
 
-@keyframes loader-fill {
-  0%,
-  100% {
-    background: #2a2a2a;
-  }
-  50% {
-    background: var(--accent);
-  }
+/* Blocks fill left to right and STAY filled — a progress bar, not a blink. */
+.loader-block.is-filled {
+  background: var(--accent);
+}
+
+.loader-pct {
+  color: var(--accent);
 }
 
 .loader-label {
@@ -1973,8 +1971,9 @@ ol {
 .reveal {
   opacity: 0;
   transform: translateY(12px);
-  /* Stepped timing — content lands in chunky pixel jumps, not smooth fades. */
-  transition: opacity 0.42s steps(5, end), transform 0.42s steps(5, end);
+  /* Stepped timing — content lands in chunky pixel jumps, not smooth fades.
+     A little longer so the scroll actually shows the lazy-load land. */
+  transition: opacity 0.55s steps(6, end), transform 0.55s steps(6, end);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
