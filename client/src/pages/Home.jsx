@@ -119,10 +119,10 @@ export default function Home() {
 
           <figure className="hero-portrait reveal">
             <PixelImage
-              src="/assets/hero-dither.png"
-              alt="Pixel-dither portrait of Hamday Rabby Hossain"
-              width="576"
-              height="720"
+              src="/assets/profile.png"
+              alt={`Portrait of ${profile.name}`}
+              width="1024"
+              height="1280"
               eager
             />
           </figure>

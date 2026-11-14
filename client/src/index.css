@@ -756,12 +756,27 @@ ol {
   }
 }
 
-/* Portrait column — pixel-art frame: 2px lime border + hard offset shadow. */
+/* Portrait column — pixel-art frame: 2px lime border + hard offset shadow.
+   A CRT scanline overlay adds retro texture while keeping the photo real. */
 .hero-portrait {
   position: relative;
   margin: 0;
   justify-self: end;
   width: min(100%, 420px);
+}
+
+.hero-portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(18, 18, 18, 0.3) 0px,
+    rgba(18, 18, 18, 0.3) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
 }
 
 /* Small pixel avatar used on the About page (keeps the pixel-art asset). */
