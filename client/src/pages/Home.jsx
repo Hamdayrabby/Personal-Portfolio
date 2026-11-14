@@ -221,7 +221,7 @@ export default function Home() {
       <section className="section" id="skills">
         <div className="container">
           <div className="section-head">
-            <h2>Tools</h2>
+            <h2>Skills</h2>
           </div>
 
           <dl className="skill-table">
