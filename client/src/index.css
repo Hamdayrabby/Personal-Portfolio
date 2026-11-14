@@ -804,22 +804,6 @@ ol {
   border-top: 0;
 }
 
-/* Small pixel avatar used on the About page (keeps the pixel-art asset). */
-.about-avatar {
-  margin: 0 0 2rem;
-  width: 180px;
-}
-
-.about-avatar img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  image-rendering: pixelated;
-  border: 2px solid var(--accent);
-  box-shadow: 6px 6px 0 var(--accent-gold);
-}
-
 .hero-portrait img {
   width: 100%;
   height: auto; /* let aspect-ratio win over the width/height attributes */
