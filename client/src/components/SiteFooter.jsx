@@ -1,7 +1,7 @@
 import { profile } from '../data/portfolioData';
 import useScrollReveal from '../hooks/useScrollReveal';
 import PixelMosaic from './PixelMosaic';
-import ScrollDots from './ScrollDots';
+import ScrollBot from './ScrollBot';
 
 const year = new Date().getFullYear();
 
@@ -38,7 +38,7 @@ export default function SiteFooter() {
   return (
     <footer className="site-footer">
       <PixelMosaic />
-      <ScrollDots />
+      <ScrollBot />
       <div className="container footer-inner">
         <p className="footer-note">
           {profile.name} — {profile.location}. {profile.availability}.
