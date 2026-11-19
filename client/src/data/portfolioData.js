@@ -29,7 +29,7 @@ export const profile = {
   bio: [
     "I work on the parts of an AI system that decide whether it survives production: who is allowed to call what, what happens when the model is wrong, and how a request travels from a browser microphone to a model and back without leaking a session.",
     "That has meant collapsing duplicate realtime gateways, replacing trusted client state with signed server state, making payment capture exactly-once, and building export pipelines whose output is validated against the format it claims to be.",
-    "My background is a Computer Science degree from HSTU, competitive programming, and two research projects — one on synthetic misinformation, one an interpretable ensemble presented at an IEEE symposium.",
+    "My background is a B.Sc. in CSE from HSTU (CGPA 3.399/4.00); the M.Sc. there is ongoing, with a thesis on hybrid graph-tabular credit card fraud detection. Around it: competitive programming, and two research projects — one on synthetic misinformation, one an interpretable ensemble presented at an IEEE symposium.",
   ],
 };
 
