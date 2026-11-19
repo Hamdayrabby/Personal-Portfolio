@@ -38,7 +38,7 @@ export default function App() {
       <Loader />
       <ScrollToTop />
       <SiteHeader />
-      <main>
+      <main id="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />

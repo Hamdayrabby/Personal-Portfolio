@@ -29,6 +29,9 @@ export default function SiteFooter() {
           <a href={profile.codeforces} target="_blank" rel="noopener noreferrer">
             Codeforces
           </a>
+          <a href={profile.leetcode} target="_blank" rel="noopener noreferrer">
+            LeetCode
+          </a>
           <span className="mono" style={{ color: 'var(--muted)' }}>
             {year}
           </span>

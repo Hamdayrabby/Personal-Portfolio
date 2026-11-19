@@ -457,6 +457,24 @@ ol {
 
 /* --- Header ---------------------------------------------------------------- */
 
+.skip-link {
+  position: absolute;
+  top: -52px;
+  left: var(--gutter);
+  z-index: 100;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius);
+  transition: top 0.15s var(--ease);
+}
+
+.skip-link:focus {
+  top: 10px;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -501,7 +519,7 @@ ol {
   letter-spacing: 0.01em;
   line-height: 1.6;
   color: var(--text-muted);
-  padding-block: 0.4rem;
+  padding: 0.7rem 0.25rem;
   position: relative;
   transition: color 0.15s var(--ease);
 }
@@ -541,7 +559,7 @@ ol {
   letter-spacing: 0.01em;
   line-height: 1.6;
   color: var(--ink);
-  padding: 0.5rem 0.75rem;
+  padding: 0.7rem 1rem;
   border: 2px solid var(--rule-strong);
 }
 
@@ -550,7 +568,7 @@ ol {
   color: var(--accent);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 640px) {
   .brand {
     font-size: 0.55rem;
   }

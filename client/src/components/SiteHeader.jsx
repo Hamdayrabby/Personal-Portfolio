@@ -14,6 +14,9 @@ export default function SiteHeader() {
 
   return (
     <header className="site-header">
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <div className="container">
         <Link to="/" className="brand" aria-label={`${profile.name} — home`}>
           {profile.name}
