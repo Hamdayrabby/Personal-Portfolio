@@ -25,7 +25,7 @@ export const profile = {
   // Hero copy. Short, declarative, no adjectives. **text** renders italic.
   lede: "I build production AI systems — real-time voice, retrieval, and **agent infrastructure**.",
   intro:
-    "Most recently at Hype Corporation, where I owned voice infrastructure, multi-tenant auth, and LLM tooling across six products. Before that, research on Bengali misinformation detection and an interpretable churn model running as a live application.",
+    "Most recently at Hype Corporation across six products: designed the ORA Machine API (OAuth 2.0, per-tenant and per-IP rate limiting) and consolidated the realtime voice gateways behind one authenticated proxy. Before that, research on Bengali misinformation detection and an interpretable churn model running as a live application.",
   bio: [
     "I work on the parts of an AI system that decide whether it survives production: who is allowed to call what, what happens when the model is wrong, and how a request travels from a browser microphone to a model and back without leaking a session.",
     "That has meant collapsing duplicate realtime gateways, replacing trusted client state with signed server state, making payment capture exactly-once, and building export pipelines whose output is validated against the format it claims to be.",
