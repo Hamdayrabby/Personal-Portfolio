@@ -15,66 +15,6 @@ const stagger = (i) => ({ '--reveal-delay': `${Math.min(i * 60, 240)}ms` });
 // on purpose.
 const SPANS = [4, 2, 3, 3, 2, 4, 3, 3];
 
-/* 8-bit icon strip: code, research, AI — pure rect SVGs, gold, decorative. */
-function PixelIcons() {
-  return (
-    <div className="hero-icons" aria-hidden="true">
-      {/* </> code */}
-      <svg viewBox="0 0 10 10" shapeRendering="crispEdges">
-        <rect x="3" y="1" width="1" height="1" />
-        <rect x="2" y="2" width="1" height="1" />
-        <rect x="1" y="3" width="1" height="1" />
-        <rect x="1" y="4" width="1" height="1" />
-        <rect x="1" y="5" width="1" height="1" />
-        <rect x="1" y="6" width="1" height="1" />
-        <rect x="2" y="7" width="1" height="1" />
-        <rect x="3" y="8" width="1" height="1" />
-        <rect x="6" y="1" width="1" height="1" />
-        <rect x="7" y="2" width="1" height="1" />
-        <rect x="8" y="3" width="1" height="1" />
-        <rect x="8" y="4" width="1" height="1" />
-        <rect x="8" y="5" width="1" height="1" />
-        <rect x="8" y="6" width="1" height="1" />
-        <rect x="7" y="7" width="1" height="1" />
-        <rect x="6" y="8" width="1" height="1" />
-        <rect x="4" y="5" width="1" height="1" />
-        <rect x="5" y="4" width="1" height="1" />
-      </svg>
-      {/* flask — research */}
-      <svg viewBox="0 0 10 10" shapeRendering="crispEdges">
-        <rect x="4" y="0" width="2" height="1" />
-        <rect x="4" y="1" width="1" height="1" />
-        <rect x="4" y="2" width="1" height="1" />
-        <rect x="3" y="3" width="2" height="1" />
-        <rect x="2" y="4" width="4" height="1" />
-        <rect x="1" y="5" width="8" height="1" />
-        <rect x="0" y="6" width="10" height="1" />
-        <rect x="0" y="7" width="10" height="1" />
-        <rect x="1" y="8" width="8" height="1" />
-        <rect x="2" y="9" width="6" height="1" />
-        <rect x="4" y="7" width="1" height="2" />
-        <rect x="6" y="7" width="1" height="1" />
-      </svg>
-      {/* chip — AI */}
-      <svg viewBox="0 0 10 10" shapeRendering="crispEdges">
-        <rect x="3" y="3" width="4" height="4" />
-        <rect x="2" y="2" width="1" height="1" />
-        <rect x="7" y="2" width="1" height="1" />
-        <rect x="2" y="7" width="1" height="1" />
-        <rect x="7" y="7" width="1" height="1" />
-        <rect x="4" y="0" width="1" height="2" />
-        <rect x="5" y="0" width="1" height="2" />
-        <rect x="4" y="8" width="1" height="2" />
-        <rect x="5" y="8" width="1" height="2" />
-        <rect x="0" y="4" width="2" height="1" />
-        <rect x="0" y="5" width="2" height="1" />
-        <rect x="8" y="4" width="2" height="1" />
-        <rect x="8" y="5" width="2" height="1" />
-      </svg>
-    </div>
-  );
-}
-
 export default function Home() {
   usePageMeta(
     'Hamday Rabby Hossain — AI Engineer',
@@ -90,8 +30,6 @@ export default function Home() {
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <PixelIcons />
-
             <h1 className="hero-role">
               <span className="visually-hidden">{profile.name} — </span>
               <RoleTicker roles={profile.roles} />

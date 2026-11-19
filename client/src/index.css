@@ -79,7 +79,7 @@
   border-radius: var(--radius);
 }
 
-.work-card-art {
+.work-card-visual {
   border-radius: var(--radius) var(--radius) 0 0;
 }
 
@@ -647,21 +647,7 @@ ol {
   margin-top: 1.75rem;
 }
 
-/* Pixel icon strip — visual anchors above the role ticker. */
-.hero-icons {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1.75rem;
-}
-
-.hero-icons svg {
-  width: 30px;
-  height: 30px;
-  fill: var(--accent-gold);
-  shape-rendering: crispEdges;
-}
-
-/* Role ticker — the h1. Retro arcade terminal line. */
+/* Role ticker — the h1. Cycles the three roles with a glyph decode. */
 .hero-role {
   font-family: var(--font-pixel);
   font-size: clamp(1rem, 1rem + 1.4vw, 1.65rem);
@@ -670,10 +656,6 @@ ol {
   letter-spacing: 0.04em;
   color: var(--ink);
   max-width: 22ch;
-}
-
-.role-prompt {
-  color: var(--accent-gold);
 }
 
 .role-cursor {
@@ -779,54 +761,12 @@ ol {
   }
 }
 
-/* Portrait column — pixel-art frame: 2px lime border + hard offset shadow.
-   A CRT scanline overlay adds retro texture while keeping the photo real. */
+/* Portrait column — the photo floats free; no frame, no overlay. */
 .hero-portrait {
   position: relative;
   margin: 0;
   justify-self: end;
   width: min(100%, 420px);
-}
-
-/* Pixel corner brackets — a quiet viewfinder cue around the photo. */
-.hero-portrait::before,
-.pixel-image::before,
-.hero-portrait::after,
-.pixel-image::after {
-  content: '';
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  border: 3px solid var(--accent);
-  pointer-events: none;
-}
-
-.hero-portrait::before {
-  top: -10px;
-  left: -10px;
-  border-right: 0;
-  border-bottom: 0;
-}
-
-.pixel-image::before {
-  top: -10px;
-  right: -10px;
-  border-left: 0;
-  border-bottom: 0;
-}
-
-.pixel-image::after {
-  bottom: -10px;
-  left: -10px;
-  border-right: 0;
-  border-top: 0;
-}
-
-.hero-portrait::after {
-  bottom: -10px;
-  right: -10px;
-  border-left: 0;
-  border-top: 0;
 }
 
 .hero-portrait img {
@@ -1047,14 +987,14 @@ ol {
 
 .work-card:hover,
 .work-card:focus-visible {
-  border-color: var(--card-accent, var(--accent));
-  box-shadow: 6px 6px 0 var(--accent-gold);
+  border-color: var(--accent);
+  box-shadow: 6px 6px 0 var(--border);
 }
 
-.work-card-art {
-  width: 100%;
-  height: auto;
-  display: block;
+/* Neutral visual slot — the architecture diagrams land here in phase 4. */
+.work-card-visual {
+  aspect-ratio: 16 / 9;
+  background: var(--surface);
   border-bottom: 2px solid var(--rule);
 }
 
@@ -1067,7 +1007,8 @@ ol {
 }
 
 .work-card .card-type {
-  color: var(--card-accent, var(--accent));
+  font-size: var(--step--1);
+  color: var(--text-muted);
 }
 
 .work-card-title {
@@ -1079,7 +1020,7 @@ ol {
 }
 
 .work-card:hover .work-card-title {
-  color: var(--card-accent, var(--accent));
+  color: var(--accent);
 }
 
 .variant-lg .work-card-title {

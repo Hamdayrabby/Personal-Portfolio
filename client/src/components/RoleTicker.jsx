@@ -76,8 +76,7 @@ export default function RoleTicker({ roles }) {
     <span className="role-ticker">
       <span className="visually-hidden">{roles.join(' · ')}</span>
       <span aria-hidden="true" className="role-ticker-line">
-        <span className="role-prompt">{'>'}</span> {shown}
-        <span className="role-cursor" />
+        {shown}
       </span>
     </span>
   );
