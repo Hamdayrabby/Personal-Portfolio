@@ -1,42 +1,50 @@
 /* ==========================================================================
    Hamday Rabby Hossain — portfolio
-   Retro/pixel system reverse-engineered from jld2nd.dev. One dark theme:
-   #121212 canvas, lime #BCED12 primary accent, #CEFF00 hover, gold #F6C53A
-   secondary, dimmed olive mosaic shades. Flat fills, hard 2px borders, zero
-   border-radius, no blur/shadows/gradients — the only "shadows" are hard
-   solid offsets. Press Start 2P carries pixel labels; Archivo carries
-   display and body. Decorative motion is disabled under reduced motion.
+   Converging on portfolio-redesign-spec.md §3: one dark canvas, one lime
+   accent (--accent, used only for links / active nav / primary button /
+   focus ring / one diagram highlight), one radius, no game cues. The
+   legacy token names below are aliases into that palette so existing
+   rules resolve without a mass rename. Motion is stepped and disabled
+   under reduced motion (full motion audit lands in T12).
    ========================================================================== */
 
-/* --- Tokens — dark only --------------------------------------------------- */
+/* --- Tokens — spec §3 (single source of truth) ---------------------------- */
 
 :root {
   color-scheme: dark;
 
-  /* Legacy names kept (--paper = page background) so existing markup stays valid. */
-  --paper: #121212;            /* measured page background */
-  --paper-raised: #1a1a1a;     /* flat raised surfaces */
-  --ink: #ffffff;              /* primary text */
-  --ink-soft: #dededc;         /* body text, dimmed from white */
-  --muted: #a8a29e;            /* warm grey meta text, ~7.5:1 on bg */
-  --rule: #2a2a2a;             /* hard hairlines */
-  --rule-strong: #3f3f3f;      /* emphasized rules */
+  --bg: #121212;
+  --surface: #181818;
+  --border: #262626;
+  --border-strong: #3a3a3a;
+  --text: #ededed;
+  --text-muted: #a3a3a3;      /* 7.4:1 on --bg — passes 4.5:1 */
+  --accent: #b8e62e;
+  --radius: 6px;
 
-  --accent: #bced12;           /* lime — logo, numerals, borders */
-  --accent-bright: #ceff00;    /* brightest lime — hover/highlight */
-  --accent-gold: #f6c53a;      /* gold — retro-game details */
-  --accent-deep: #566912;      /* dimmed olive — hard offset shadows */
-  --accent-fill: #bced12;      /* CTA fill */
-  --accent-fill-hover: #ceff00;
-  --on-accent: #000000;        /* measured black on lime fill */
-  --accent-wash: #171a10;      /* flat lime-cast hover surface */
+  /* Legacy aliases — every existing rule resolves into the palette above. */
+  --paper: var(--bg);
+  --paper-raised: var(--surface);
+  --ink: var(--text);
+  --ink-soft: var(--text);
+  --muted: var(--text-muted);
+  --rule: var(--border);
+  --rule-strong: var(--border-strong);
 
-  --olive-1: #566912;          /* mosaic squares */
-  --olive-2: #5b7012;
-  --olive-3: #617812;
+  --accent-bright: var(--accent);
+  --accent-gold: var(--accent);   /* one-accent rule: former gold details render lime */
+  --accent-deep: var(--border-strong);
+  --accent-fill: var(--accent);
+  --accent-fill-hover: var(--accent);
+  --on-accent: #121212;
+  --accent-wash: #1b2010;
 
-  --status-ok: #bced12;
-  --status-err: #f6c53a;
+  --olive-1: var(--border);
+  --olive-2: var(--border);
+  --olive-3: var(--border-strong);
+
+  --status-ok: var(--accent);
+  --status-err: #d17060;          /* semantic error color, distinct from the accent */
 
   --font-pixel: 'Press Start 2P', 'Courier New', monospace;
   --font-display: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -49,13 +57,30 @@
   --step-1: 1.125rem;
   --step-2: clamp(1.4375rem, 1.15rem + 1.2vw, 1.875rem);
   --step-3: clamp(1.875rem, 1.4rem + 2.2vw, 2.75rem);
-  --step-4: clamp(2.5rem, 1.6rem + 4vw, 4.75rem);
+  --step-4: clamp(2.25rem, 5vw, 4rem);   /* spec §3 H1 scale */
 
   --gutter: clamp(1.25rem, 4vw, 3rem);
-  --measure: 66ch;
+  --measure: 68ch;
   --section-gap: clamp(4rem, 8vw, 7.5rem);
 
   --ease: steps(6, end);
+}
+
+/* --- Radius application (spec: one radius everywhere) ---------------------- */
+
+.work-card,
+.project-card,
+.pixel-btn,
+.submit,
+.tag,
+.form-status,
+.case-note,
+.hero-portrait img {
+  border-radius: var(--radius);
+}
+
+.work-card-art {
+  border-radius: var(--radius) var(--radius) 0 0;
 }
 
 /* --- Reset ---------------------------------------------------------------- */
@@ -84,7 +109,7 @@ body {
   font-family: var(--font-sans);
   font-size: var(--step-0);
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.65;
   letter-spacing: 0.005em;
   font-synthesis-weight: none;
   -webkit-font-smoothing: antialiased;
@@ -358,7 +383,7 @@ ol {
 .loader-block {
   width: 14px;
   height: 14px;
-  background: #2a2a2a;
+  background: var(--border);
 }
 
 /* Blocks fill left to right and STAY filled — a progress bar, not a blink. */
@@ -402,7 +427,7 @@ ol {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: #161616;
+  background: var(--surface);
 }
 
 .pixel-image.is-loaded .pixel-image-loading {
@@ -412,7 +437,7 @@ ol {
 .pixel-image-loading i {
   width: 13px;
   height: 13px;
-  background: #2a2a2a;
+  background: var(--border);
   animation: blink 0.9s steps(1, end) infinite;
 }
 
@@ -695,11 +720,11 @@ ol {
 .pixel-btn-ghost {
   color: var(--accent);
   background: transparent;
-  box-shadow: 4px 4px 0 #2a2a2a;
+  box-shadow: 4px 4px 0 var(--border);
 }
 
 .pixel-btn-ghost:hover {
-  box-shadow: 2px 2px 0 #2a2a2a;
+  box-shadow: 2px 2px 0 var(--border);
 }
 
 .hero-ctas {
@@ -1195,7 +1220,7 @@ ol {
   color: var(--ink-soft);
   font-size: var(--step-0);
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.65;
   max-width: 62ch;
 }
 
@@ -1533,7 +1558,7 @@ ol {
   grid-template-columns: 1.25rem minmax(0, 1fr);
   gap: 0.65rem;
   color: var(--ink-soft);
-  line-height: 1.7;
+  line-height: 1.65;
   max-width: 62ch;
 }
 
@@ -1565,7 +1590,7 @@ ol {
   font-size: var(--step--1);
   color: var(--ink-soft);
   max-width: var(--measure);
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
 .case-links {
@@ -1743,7 +1768,7 @@ ol {
 
 .archive-summary {
   color: var(--ink-soft);
-  line-height: 1.7;
+  line-height: 1.65;
   max-width: 68ch;
 }
 
@@ -1919,7 +1944,7 @@ ol {
   font-size: var(--step--1);
   color: var(--muted);
   max-width: 40ch;
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
 .footer-links {
