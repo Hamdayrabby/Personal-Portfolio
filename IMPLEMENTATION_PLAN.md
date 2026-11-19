@@ -71,20 +71,24 @@ lime). Adopt the spec's full token block in T06 to avoid two limes.
 
 ---
 
-## 2. Decision gates — answer these before the gated tasks
+## 2. Decision gates — RESOLVED (owner accepted the recommendations, 2026-11-19)
 
-| Gate | Blocks tasks | Options |
-|---|---|---|
-| D1 Identity | T02, T17, T23 | (a) AI Engineer (spec) · (b) keep Software Developer |
-| D2 Ticker | T07 | (a) remove · (b) keep, drop prompt/cursor |
-| D3 Card banners | T10, T19–T22 | (a) remove → diagrams · (b) keep pixel art |
-| D4 Grid shape | T10 | (a) uniform 2-col (spec) · (b) keep bento, flat cards |
-| D5 Strips / bot / icons | T08 | strips: (a) all removed (b) one static footer strip · bot: (a) 2px top line (b) keep bot · icons: (a) remove (b) keep |
-| D6 Resume | T17 | (a) remove page, direct PDF · (b) real one-pager |
-| D7 Forms | T23 | (a) keep EmailJS + honeypot · (b) Netlify Forms |
-| D8 Pixel font | T09, T26 | (a) wordmark + loader only · (b) fully SVG wordmark, no pixel font |
-
-Recommended answers: D1=a, D2=a (or b), D3=a, D4=defer to after T10, D5=strips-b / bot-b / icons-a, D6=a once PDF exists, D7=a, D8=a.
+- **D1 = a — identity is "AI Engineer"** in `<title>`, meta, Resume header, and any
+  identity line. Job titles inside Experience stay truthful ("Junior Software
+  Developer", "Research Assistant").
+- **D2 = b — keep the RoleTicker**, drop the `> ` prompt and the blinking cursor.
+  The animation stays; the game-terminal styling goes.
+- **D3 = a — pixel card banners and the 8-color theme system are removed.** Cards
+  render a neutral `--surface` placeholder area until the phase-4 diagrams land.
+- **D4 = deferred** — re-evaluate the grid shape after T10; the "uneven rows"
+  complaint may have been the banners, not the spans.
+- **D5 = strips: one static monochrome strip in the footer only · bot: keep the
+  ScrollBot · hero icons: removed.**
+- **D6 = a — `/resume` is removed once `Hamday_Rabby_Hossain_Resume.pdf` exists.**
+  Until the PDF is provided, the current minimal page stays. T17 is gated on it.
+- **D7 = a — EmailJS stays**, a honeypot field is added manually in T23.
+- **D8 = a — pixel font only in the wordmark and the boot loader.** Nav, tags,
+  labels, and filter buttons move to body font in T09.
 
 ---
 

@@ -1,0 +1,11 @@
+# handoff.md — codebase map (every agent updates this after its session, ≤30 lines)
+
+- Stack: React 19 + Vite 8, react-router-dom v7 (BrowserRouter), no UI framework, no backend. Netlify (`netlify.toml`, base=client, publish dist).
+- Routes (App.jsx): `/` Home · `/projects` filter grid + Archive · `/projects/:slug` case studies · `/about` · `/resume` (minimal: intro + Download button) · `/contact` (EmailJS). `/work` + `/work/:slug` redirect. `*` renders the not-found view.
+- Single data source: `client/src/data/portfolioData.js` — profile (+roles, resumePdf), experience[2], leadership[2], projects[8] (full case studies), research[2], archive[9], skills, education[2], awards, certifications[3].
+- Components: Loader (~2.2s boot sequence), RoleTicker (hero, D2=b keep), PixelImage (placeholder until onLoad), PixelMosaic, ScrollBot (right rail, D5=keep), WorkCard (bento grid, per-slug color themes — D3=a removes banners), WorkRow (research rows), RichText (`**text**` → italic), SiteHeader, SiteFooter.
+- CSS: one file `client/src/index.css` (~28 kB). Retro tokens at `:root`: #121212 base, lime #BCED12, gold #F6C53A, Press Start 2P (wordmark/loader/labels) + Archivo, square corners, 2px borders, flat offset shadows, stepped `.reveal` (0.55s steps(6)), print block for /resume.
+- Assets: `profile.png` (hero photo, frameless with lime corner brackets), favicon.jpg, cert png. `profile-pixel.png` deleted 862e7ce.
+- Active work: `IMPLEMENTATION_PLAN.md` (27 tasks, 5 phases; gates D1–D8 RESOLVED in its §2). Spec: `portfolio-redesign-spec.md`. Copy rules: KEEP-marked copy is untouched; facts only from portfolioData.js; `TODO(owner):` for unknowns.
+- Verify every change: `npm run lint` + `npm run build` in `client/`, then visual at 375/768/1440.
+- Gotchas: IAB screenshot/scroll flakiness in testing — prefer DOM measurement. Pixel font must never render below 12px after T09. Case studies already exist (spec §5.2 is an upgrade task, not a build task).
