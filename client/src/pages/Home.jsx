@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { profile, projects, experience, research, skills } from '../data/portfolioData';
 import useScrollReveal from '../hooks/useScrollReveal';
+import usePageMeta from '../hooks/usePageMeta';
 import RoleTicker from '../components/RoleTicker';
 import PixelImage from '../components/PixelImage';
 import PixelMosaic from '../components/PixelMosaic';
@@ -75,6 +76,10 @@ function PixelIcons() {
 }
 
 export default function Home() {
+  usePageMeta(
+    'Hamday Rabby Hossain — AI Engineer',
+    'AI engineer building production systems in real-time voice, retrieval, and agent infrastructure. Case studies, research, and resume.'
+  );
   useScrollReveal();
 
   const featured = projects.filter((p) => p.featured);

@@ -1,8 +1,13 @@
 import { profile } from '../data/portfolioData';
+import usePageMeta from '../hooks/usePageMeta';
 
 // Minimal resume page: short intro + download. The full record lives on
 // /projects and /about; the PDF is the single source for recruiters.
 export default function Resume() {
+  usePageMeta(
+    'Resume — Hamday Rabby Hossain',
+    'Download the resume of Hamday Rabby Hossain, AI engineer.'
+  );
   return (
     <div className="container" style={{ paddingBlock: 'clamp(3rem, 8vw, 6rem)' }}>
       <p className="eyebrow">Resume</p>

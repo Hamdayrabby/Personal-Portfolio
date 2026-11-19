@@ -8,8 +8,13 @@ import {
   leadership,
 } from '../data/portfolioData';
 import useScrollReveal from '../hooks/useScrollReveal';
+import usePageMeta from '../hooks/usePageMeta';
 
 export default function About() {
+  usePageMeta(
+    'About — Hamday Rabby Hossain',
+    'How Hamday builds production AI systems: experience, education, research, and recognition.'
+  );
   useScrollReveal();
 
   return (

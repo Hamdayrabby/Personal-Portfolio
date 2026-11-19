@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { projects, research } from '../data/portfolioData';
 import useScrollReveal from '../hooks/useScrollReveal';
+import usePageMeta from '../hooks/usePageMeta';
 
 const entries = [...projects, ...research];
 
@@ -10,6 +11,11 @@ export default function CaseStudy() {
 
   const index = entries.findIndex((e) => e.slug === slug);
   const item = entries[index];
+
+  usePageMeta(
+    item ? `${item.title} — Hamday Rabby Hossain` : 'Not found — Hamday Rabby Hossain',
+    item ? item.summary : 'That page does not exist.'
+  );
 
   if (!item) {
     return (

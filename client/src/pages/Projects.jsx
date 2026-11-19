@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projects, research, archive, featuredOrder } from '../data/portfolioData';
+import usePageMeta from '../hooks/usePageMeta';
 
 const FILTERS = [
   { key: 'all', label: 'All' },
@@ -18,6 +19,10 @@ const allEntries = [
 ];
 
 export default function Projects() {
+  usePageMeta(
+    'Projects — Hamday Rabby Hossain',
+    'Case studies covering the decisions and tradeoffs behind production AI systems — voice agents, coding tools, and research.'
+  );
   const [filter, setFilter] = useState('all');
 
   const visible =

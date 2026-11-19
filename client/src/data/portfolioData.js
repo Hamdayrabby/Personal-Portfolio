@@ -9,7 +9,7 @@
 
 export const profile = {
   name: "Hamday Rabby Hossain",
-  role: "Software Developer",
+  role: "AI Engineer",
   location: "Dhaka, Bangladesh",
   email: "hamdayrabby385@gmail.com",
   phone: "+880 1720 908856",

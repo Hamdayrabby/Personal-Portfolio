@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { profile } from '../data/portfolioData';
+import usePageMeta from '../hooks/usePageMeta';
 
 emailjs.init('ANG8Bxt75tbHk2y2U');
 
@@ -8,6 +9,10 @@ const SERVICE_ID = 'service_okborg6';
 const TEMPLATE_ID = 'template_783gw16';
 
 export default function Contact() {
+  usePageMeta(
+    'Contact — Hamday Rabby Hossain',
+    'Get in touch about AI engineering and backend roles.'
+  );
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
