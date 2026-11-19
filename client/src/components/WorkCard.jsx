@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
+import ArchitectureDiagram from './ArchitectureDiagram';
 
-/* Spec §5.1 card anatomy: visual slot (placeholder until the phase-4
-   diagrams), title, one-line outcome, ≤4 tags, access label. The whole
-   card links to the case study. */
 function accessLabel(item) {
   if (item.visibility === 'private') {
     return 'Private codebase — walkthrough on request';
@@ -14,16 +12,15 @@ function accessLabel(item) {
   return 'Public';
 }
 
-export default function WorkCard({ item, span, index }) {
-  const variant = span >= 4 ? 'lg' : span >= 3 ? 'md' : 'sm';
-
+export default function WorkCard({ item, featured = false }) {
   return (
     <Link
       to={`/projects/${item.slug}`}
-      className={`work-card span-${span} variant-${variant} reveal`}
-      style={{ '--reveal-delay': `${Math.min(index * 60, 240)}ms` }}
+      className={`work-card ${featured ? 'is-featured' : ''}`}
     >
-      <div className="work-card-visual" aria-hidden="true" />
+      <div className="work-card-visual">
+        <ArchitectureDiagram slug={item.slug} compact />
+      </div>
       <div className="work-card-body">
         {item.kind === 'research' && <p className="card-type">Research</p>}
         <h3 className="work-card-title">{item.title}</h3>

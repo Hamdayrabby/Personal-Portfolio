@@ -6,8 +6,8 @@ import {
   certifications,
   experience,
   leadership,
+  research,
 } from '../data/portfolioData';
-import useScrollReveal from '../hooks/useScrollReveal';
 import usePageMeta from '../hooks/usePageMeta';
 
 export default function About() {
@@ -15,13 +15,13 @@ export default function About() {
     'About — Hamday Rabby Hossain',
     'How Hamday builds production AI systems: experience, education, research, and recognition.'
   );
-  useScrollReveal();
 
   return (
     <div>
+      {/* 1. Intro */}
       <section className="hero" style={{ paddingBottom: 0 }}>
         <div className="container">
-          <h1 className="lede" style={{ marginTop: '1.25rem', maxWidth: '16ch' }}>
+          <h1 className="lede" style={{ marginTop: '1.25rem', maxWidth: '20ch' }}>
             How I got here, and what I actually care about.
           </h1>
         </div>
@@ -29,7 +29,7 @@ export default function About() {
 
       <section className="section">
         <div className="container">
-          <div className="hero-body" style={{ borderTop: '1px solid var(--rule)' }}>
+          <div className="hero-body" style={{ borderTop: '1px solid var(--border)' }}>
             <div className="prose">
               {profile.bio.map((para) => (
                 <p key={para.slice(0, 24)}>{para}</p>
@@ -56,6 +56,14 @@ export default function About() {
                 LinkedIn <span className="arrow">↗</span>
               </a>
               <a
+                href={profile.codeforces}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="arrow-link"
+              >
+                Codeforces <span className="arrow">↗</span>
+              </a>
+              <a
                 href={profile.leetcode}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -68,16 +76,16 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section">
+      {/* 2. Experience */}
+      <section className="section" id="experience">
         <div className="container">
           <div className="section-head">
             <h2>Experience</h2>
           </div>
           <div className="timeline">
-            {experience.map((job, i) => (
+            {experience.map((job) => (
               <article
-                className="tl-item reveal"
-                style={{ '--reveal-delay': `${Math.min(i * 60, 240)}ms` }}
+                className="tl-item"
                 key={`${job.org}-${job.period}`}
               >
                 <p className="tl-date">{job.period}</p>
@@ -94,30 +102,9 @@ export default function About() {
                       ))}
                     </ul>
                   )}
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <div className="section-head">
-            <h2>Education</h2>
-          </div>
-          <div className="timeline">
-            {education.map((ed) => (
-              <article className="tl-item" key={ed.degree}>
-                <p className="tl-date">{ed.period}</p>
-                <div>
-                  <h3 className="tl-role">{ed.degree}</h3>
-                  <p className="tl-org">
-                    {ed.institution} · {ed.location}
-                  </p>
-                  {ed.detail && (
-                    <p className="tl-summary" style={{ fontSize: 'var(--step--1)' }}>
-                      {ed.detail}
+                  {job.products && (
+                    <p className="tl-products" style={{ marginTop: '0.75rem', fontSize: 'var(--step--1)', color: 'var(--text-muted)' }}>
+                      Products: {job.products.join(' · ')}
                     </p>
                   )}
                 </div>
@@ -127,18 +114,24 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section">
+      {/* 3. Education */}
+      <section className="section" id="education">
         <div className="container">
           <div className="section-head">
-            <h2>Leadership</h2>
+            <h2>Education</h2>
           </div>
           <div className="timeline">
-            {leadership.map((item) => (
-              <article className="tl-item" key={item.role}>
-                <p className="tl-date">{item.period}</p>
+            {education.map((edu) => (
+              <article className="tl-item" key={edu.degree}>
+                <p className="tl-date">{edu.period}</p>
                 <div>
-                  <h3 className="tl-role">{item.role}</h3>
-                  <p className="tl-org">{item.org}</p>
+                  <h3 className="tl-role">{edu.degree}</h3>
+                  <p className="tl-org">
+                    {edu.institution} · {edu.location}
+                  </p>
+                  <p className="tl-summary" style={{ fontWeight: '500', color: 'var(--text)' }}>
+                    {edu.detail}
+                  </p>
                 </div>
               </article>
             ))}
@@ -146,42 +139,103 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section">
+      {/* 4. Research and publications */}
+      <section className="section" id="research">
         <div className="container">
           <div className="section-head">
-            <h2>Selected recognition</h2>
+            <h2>Research & Publications</h2>
+            <span className="count">{research.length} entries</span>
+          </div>
+          <div className="timeline">
+            {research.map((item) => (
+              <article className="tl-item" key={item.slug}>
+                <p className="tl-date">{item.venue.split('·')[1]?.trim() || item.role}</p>
+                <div>
+                  <h3 className="tl-role">
+                    <Link to={`/projects/${item.slug}`} className="link">
+                      {item.title}
+                    </Link>
+                  </h3>
+                  <p className="tl-org">{item.venue}</p>
+                  <p className="tl-summary">{item.summary}</p>
+                  <div style={{ marginTop: '0.75rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                    <Link to={`/projects/${item.slug}`} className="arrow-link" style={{ fontSize: 'var(--step--1)' }}>
+                      Read case study <span className="arrow">→</span>
+                    </Link>
+                    {item.links?.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="arrow-link"
+                        style={{ fontSize: 'var(--step--1)' }}
+                      >
+                        {link.label} <span className="arrow">↗</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Recognition */}
+      <section className="section" id="recognition">
+        <div className="container">
+          <div className="section-head">
+            <h2>Recognition</h2>
           </div>
           <ul className="plain-list">
-            {awards.map((a) => (
-              <li key={a.label}>
-                <span>{a.label}</span>
-                <span className="plain-meta">{a.detail}</span>
+            {awards.map((award) => (
+              <li key={award.title}>
+                <span className="plain-title">{award.title}</span>
+                <span className="plain-meta">
+                  {award.org} · {award.year}
+                </span>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <section className="section">
+      {/* 6. Leadership */}
+      <section className="section" id="leadership">
+        <div className="container">
+          <div className="section-head">
+            <h2>Leadership</h2>
+          </div>
+          <ul className="plain-list">
+            {leadership.map((item) => (
+              <li key={item.role}>
+                <span className="plain-title">{item.role}</span>
+                <span className="plain-meta">
+                  {item.org} · {item.period}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 7. Certifications */}
+      <section className="section" id="certifications">
         <div className="container">
           <div className="section-head">
             <h2>Certifications</h2>
           </div>
           <ul className="plain-list">
-            {certifications.map((c) => (
-              <li key={c.name}>
-                <span>
-                  {c.name} — {c.issuer}
+            {certifications.map((cert) => (
+              <li key={cert.name}>
+                <span className="plain-title">{cert.name}</span>
+                <span className="plain-meta">
+                  {cert.issuer} · {cert.year}
                 </span>
-                <span className="plain-meta">{c.year}</span>
               </li>
             ))}
           </ul>
-          <p style={{ marginTop: '2rem' }}>
-            <Link to="/resume" className="arrow-link">
-              Full resume <span className="arrow">→</span>
-            </Link>
-          </p>
         </div>
       </section>
     </div>

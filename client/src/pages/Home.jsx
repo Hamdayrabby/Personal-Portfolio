@@ -1,52 +1,41 @@
 import { Link } from 'react-router-dom';
-import { profile, projects, experience, research, skills } from '../data/portfolioData';
-import useScrollReveal from '../hooks/useScrollReveal';
+import { profile, projects, experience, research, skills, featuredOrder } from '../data/portfolioData';
 import usePageMeta from '../hooks/usePageMeta';
-import RoleTicker from '../components/RoleTicker';
 import PixelImage from '../components/PixelImage';
 import WorkRow from '../components/WorkRow';
 import WorkCard from '../components/WorkCard';
-
-const stagger = (i) => ({ '--reveal-delay': `${Math.min(i * 60, 240)}ms` });
-
-// Asymmetric column spans on the 6-column grid — 4 = large, 3 = medium,
-// 2 = small. One large card per pair of rows keeps the layout unbalanced
-// on purpose.
-const SPANS = [4, 2, 3, 3, 2, 4, 3, 3];
 
 export default function Home() {
   usePageMeta(
     'Hamday Rabby Hossain — AI Engineer',
     'AI engineer building production systems in real-time voice, retrieval, and agent infrastructure. Case studies, research, and resume.'
   );
-  useScrollReveal();
 
-  const featured = projects.filter((p) => p.featured);
+  // 6 selected cards per spec §5.1: ORA, Adcut, Axo, Hubble, Quorum, manygpt
+  const featured = featuredOrder
+    .map((slug) => projects.find((p) => p.slug === slug))
+    .filter(Boolean);
 
   return (
-    <div>
-      {/* Hero — retro title screen: role ticker + real portrait, minimal text */}
-      <section className="hero">
+    <div className="home-page">
+      {/* 1. Hero */}
+      <section className="hero hero-load">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <h1 className="hero-role">
-              <span className="visually-hidden">{profile.name} — </span>
-              <RoleTicker roles={profile.roles} />
-            </h1>
+            <h1 className="hero-heading">I build production AI systems.</h1>
 
-            <p className="hero-tagline">I build production AI systems.</p>
+            <p className="hero-subline">
+              Real-time voice, retrieval, and agent infrastructure. Junior Software Developer at Hype Corporation; M.Sc. thesis on graph-tabular fraud detection at HSTU.
+            </p>
 
-            <div className="hero-meta">
+            <div className="hero-status">
+              <span className="status-dot" aria-hidden="true" />
               <span>{profile.availability}</span>
-              <span className="dot" aria-hidden="true">
-                ·
-              </span>
-              <span>Most recently at Hype Corporation</span>
             </div>
 
             <div className="hero-ctas">
               <Link to="/projects" className="pixel-btn">
-                ▶ View Projects
+                View projects
               </Link>
               <a
                 href={profile.resumePdf}
@@ -59,7 +48,7 @@ export default function Home() {
             </div>
           </div>
 
-          <figure className="hero-portrait reveal">
+          <figure className="hero-portrait">
             <PixelImage
               src="/assets/profile.png"
               alt={`Portrait of ${profile.name}`}
@@ -71,7 +60,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Selected work */}
+      {/* 2. Selected work */}
       <section className="section" id="work">
         <div className="container">
           <div className="section-head">
@@ -86,8 +75,7 @@ export default function Home() {
               <WorkCard
                 key={item.slug}
                 item={item}
-                span={SPANS[i % SPANS.length]}
-                index={i}
+                featured={i === 0}
               />
             ))}
           </div>
@@ -100,43 +88,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experience */}
-      <section className="section" id="experience">
-        <div className="container">
-          <div className="section-head">
-            <h2>Experience</h2>
-          </div>
-
-          <div className="timeline">
-            {experience.map((job, i) => (
-              <article className="tl-item reveal" style={stagger(i)} key={`${job.org}-${job.period}`}>
-                <p className="tl-date">{job.period}</p>
-                <div>
-                  <h3 className="tl-role">{job.role}</h3>
-                  <p className="tl-org">
-                    {job.org} · {job.location}
-                  </p>
-                  <p className="tl-summary">{job.summary}</p>
-                  {job.highlights && (
-                    <ul className="tl-list">
-                      {job.highlights.map((h) => (
-                        <li key={h}>{h}</li>
-                      ))}
-                    </ul>
-                  )}
-                  {job.products && (
-                    <p className="tl-products">
-                      Products: {job.products.join(' · ')}
-                    </p>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Research */}
+      {/* 3. Research */}
       <section className="section" id="research">
         <div className="container">
           <div className="section-head">
@@ -145,11 +97,10 @@ export default function Home() {
           </div>
 
           <div className="work-list">
-            {research.map((item, i) => (
+            {research.map((item) => (
               <WorkRow
                 key={item.slug}
                 item={item}
-                index={i}
                 meta={[item.venue, item.role]}
               />
             ))}
@@ -157,7 +108,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Tools */}
+      {/* 4. Experience (compact) */}
+      <section className="section" id="experience">
+        <div className="container">
+          <div className="section-head">
+            <h2>Experience</h2>
+          </div>
+
+          <div className="timeline">
+            {experience.map((job) => (
+              <article className="tl-item" key={`${job.org}-${job.period}`}>
+                <p className="tl-date">{job.period}</p>
+                <div>
+                  <h3 className="tl-role">{job.role}</h3>
+                  <p className="tl-org">
+                    {job.org} · {job.location}
+                  </p>
+                  <p className="tl-summary">{job.summary}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <p style={{ marginTop: '2rem' }}>
+            <Link to="/about" className="arrow-link">
+              Full experience on About <span className="arrow">→</span>
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      {/* 5. Skills (compact) */}
       <section className="section" id="skills">
         <div className="container">
           <div className="section-head">
@@ -165,8 +146,8 @@ export default function Home() {
           </div>
 
           <dl className="skill-table">
-            {skills.map((group, i) => (
-              <div className="skill-row reveal" style={stagger(i)} key={group.label}>
+            {skills.map((group) => (
+              <div className="skill-row" key={group.label}>
                 <dt>{group.label}</dt>
                 <dd>
                   {group.items.map((item) => (
@@ -179,7 +160,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact */}
+      {/* 6. Contact CTA */}
       <section className="section" id="contact-cta">
         <div className="container">
           <h2

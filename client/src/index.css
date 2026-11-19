@@ -75,7 +75,9 @@
 .tag,
 .form-status,
 .case-note,
-.hero-portrait img {
+.hero-portrait img,
+.field input,
+.field textarea {
   border-radius: var(--radius);
 }
 
@@ -125,7 +127,7 @@ svg {
 
 /* Pixel-art rendering for every raster image — squares all the way down. */
 img {
-  image-rendering: pixelated;
+  image-rendering: auto;
 }
 
 a {
@@ -341,74 +343,6 @@ ol {
   color: var(--accent-bright);
 }
 
-/* --- Loader ---------------------------------------------------------------- */
-
-.loader {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: grid;
-  place-items: center;
-  background: var(--paper);
-  transition: opacity 0.24s var(--ease);
-}
-
-.loader.is-done {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.loader-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.75rem;
-}
-
-.loader-name {
-  font-family: var(--font-pixel);
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  color: var(--ink);
-  line-height: 1.8;
-  text-align: center;
-}
-
-.loader-bar {
-  display: flex;
-  gap: 6px;
-}
-
-.loader-block {
-  width: 14px;
-  height: 14px;
-  background: var(--border);
-}
-
-/* Blocks fill left to right and STAY filled — a progress bar, not a blink. */
-.loader-block.is-filled {
-  background: var(--accent);
-}
-
-.loader-pct {
-  color: var(--accent);
-}
-
-.loader-label {
-  font-family: var(--font-pixel);
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-}
-
-.loader-label .role-cursor {
-  width: 0.55em;
-  height: 0.9em;
-}
-
 /* --- Pixel image placeholder --------------------------------------------- */
 
 .pixel-image {
@@ -570,7 +504,7 @@ ol {
 
 @media (max-width: 640px) {
   .brand {
-    font-size: 0.55rem;
+    font-size: 0.75rem;
   }
 
   .nav-toggle {
@@ -661,6 +595,42 @@ ol {
   letter-spacing: -0.01em;
   color: var(--ink);
   max-width: 22ch;
+}
+
+.hero-heading {
+  font-family: var(--font-display);
+  font-size: var(--step-4);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  max-width: 14ch;
+  color: var(--text);
+}
+
+.hero-subline {
+  margin-top: 1.25rem;
+  font-size: var(--step-1);
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: 54ch;
+}
+
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  font-size: var(--step--1);
+  color: var(--text);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 8px rgba(184, 230, 46, 0.4);
 }
 
 .role-cursor {
@@ -816,164 +786,27 @@ ol {
   background: var(--border);
 }
 
-/* --- Scroll dots — gold Pac-Man-style trail on the right edge ---------------- */
-
-.scroll-bot {
-  position: fixed;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 40;
-  pointer-events: none;
-}
-
-.bot-track {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.scroll-bot .dot {
-  width: 7px;
-  height: 7px;
-  background: var(--olive-2);
-}
-
-.scroll-bot .dot.is-filled {
-  background: var(--accent-gold);
-}
-
-/* The bot rides the rail: JS sets translateY from scroll progress. */
-.bot {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 26px;
-  transform: translate(-50%, 0);
-  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.55));
-}
-
-.bot-svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Idle: gentle two-frame hover bob + antenna blink. */
-.bot-svg {
-  animation: bot-bob 1.6s steps(2, end) infinite;
-}
-
-@keyframes bot-bob {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2px);
-  }
-}
-
-.bot-antenna {
-  animation: bot-blink 2.4s steps(1, end) infinite;
-}
-
-.bot-eye {
-  animation: bot-blink 3.6s steps(1, end) infinite;
-}
-
-.bot-core {
-  animation: bot-blink 1.2s steps(1, end) infinite;
-}
-
-@keyframes bot-blink {
-  0%,
-  86%,
-  100% {
-    opacity: 1;
-  }
-  90%,
-  96% {
-    opacity: 0;
-  }
-}
-
-/* While scrolling: legs step, flames flicker on. */
-.scroll-bot.is-moving .bot-leg.leg-a {
-  animation: bot-step 0.4s steps(1, end) infinite;
-}
-
-.scroll-bot.is-moving .bot-leg.leg-b {
-  animation: bot-step 0.4s steps(1, end) infinite reverse;
-}
-
-@keyframes bot-step {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.25;
-  }
-}
-
-.bot-flames {
-  opacity: 0;
-}
-
-.scroll-bot.is-moving .bot-flames {
-  opacity: 1;
-  animation: bot-flame 0.24s steps(1, end) infinite;
-}
-
-@keyframes bot-flame {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(1px);
-    opacity: 0.55;
-  }
-}
-
-@media (max-width: 1100px) {
-  .scroll-bot {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .bot-svg,
-  .bot-antenna,
-  .bot-eye,
-  .bot-core,
-  .bot-leg,
-  .bot-flames {
-    animation: none;
-  }
-
-  .bot-flames {
-    opacity: 0;
-  }
-}
-
-/* --- Work grid (Selected work — asymmetric retro cards) ----------------------- */
+/* --- Work grid (Selected work — uniform 2-col grid, full-width ORA) --------- */
 
 .work-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
 
 .work-card {
   display: flex;
   flex-direction: column;
-  border: 2px solid var(--rule);
-  background: transparent;
-  transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius);
+  transition: border-color 0.15s ease;
+  overflow: hidden;
+  height: 100%;
+}
+
+.work-card.is-featured {
+  grid-column: 1 / -1;
 }
 
 .work-card:hover,
@@ -981,18 +814,27 @@ ol {
   border-color: var(--accent);
 }
 
-/* Neutral visual slot — the architecture diagrams land here in phase 4. */
 .work-card-visual {
   aspect-ratio: 16 / 9;
-  background: var(--surface);
-  border-bottom: 2px solid var(--rule);
+  background: #141414;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.work-card-visual svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .work-card-body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 1.15rem 1.3rem 1.4rem;
+  padding: 1.25rem 1.4rem 1.5rem;
   flex: 1;
 }
 
@@ -1004,25 +846,18 @@ ol {
 .work-card-title {
   font-family: var(--font-display);
   font-weight: 800;
-  line-height: 1.1;
+  font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.6rem);
+  line-height: 1.2;
   letter-spacing: -0.01em;
-  transition: color 0.15s var(--ease);
+  transition: color 0.15s ease;
 }
 
 .work-card:hover .work-card-title {
   color: var(--accent);
 }
 
-.variant-lg .work-card-title {
-  font-size: clamp(1.6rem, 1.3rem + 1.4vw, 2.3rem);
-}
-
-.variant-md .work-card-title {
-  font-size: clamp(1.3rem, 1.1rem + 0.9vw, 1.7rem);
-}
-
-.variant-sm .work-card-title {
-  font-size: 1.15rem;
+.work-card.is-featured .work-card-title {
+  font-size: clamp(1.5rem, 1.3rem + 1.2vw, 2.1rem);
 }
 
 .work-card-sub {
@@ -1036,58 +871,31 @@ ol {
   line-height: 1.65;
 }
 
-.variant-lg .work-card-summary {
-  max-width: 52ch;
+.work-card.is-featured .work-card-summary {
+  max-width: 60ch;
 }
 
 .work-card .card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
   padding-top: 0.5rem;
 }
 
 .work-card .card-access {
   margin-top: auto;
-  padding-top: 0.5rem;
-  font-size: 0.75rem;
+  padding-top: 0.75rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
 }
 
-.span-4 {
-  grid-column: span 4;
-}
-
-.span-3 {
-  grid-column: span 3;
-}
-
-.span-2 {
-  grid-column: span 2;
-}
-
-@media (max-width: 1000px) {
-  .work-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.1rem;
-  }
-
-  .span-4 {
-    grid-column: span 2;
-  }
-
-  .span-3,
-  .span-2 {
-    grid-column: span 1;
-  }
-}
-
-@media (max-width: 620px) {
+@media (max-width: 768px) {
   .work-grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
-
-  .span-4,
-  .span-3,
-  .span-2 {
-    grid-column: span 1;
+  .work-card.is-featured {
+    grid-column: 1;
   }
 }
 
@@ -1209,9 +1017,18 @@ ol {
 
 .projects-filter {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.filter-chips {
+  display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-bottom: 2.5rem;
+  align-items: center;
 }
 
 .filter-btn {
@@ -1766,7 +1583,8 @@ ol {
 .field input,
 .field textarea {
   background: var(--paper-raised);
-  border: 2px solid var(--rule);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   padding: 0.75rem 0.9rem;
   font-size: var(--step-0);
   color: var(--ink);
@@ -1896,27 +1714,31 @@ ol {
   border-bottom-color: var(--accent);
 }
 
-/* --- Reveal -------------------------------------------------------------------------------- */
+/* --- Reveal (spec §4: no scroll-triggered fade-ins on sections; one load reveal on hero only) ---- */
 
 .reveal {
-  opacity: 0;
-  transform: translateY(12px);
-  /* Stepped timing — content lands in chunky pixel jumps, not smooth fades.
-     A little longer so the scroll actually shows the lazy-load land. */
-  transition: opacity 0.55s steps(6, end), transform 0.55s steps(6, end);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-.reveal.is-visible {
   opacity: 1;
   transform: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
+.hero-load {
+  animation: heroFadeIn 0.35s ease-out both;
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
     opacity: 1;
-    transform: none;
-    transition: none;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-load {
+    animation: none !important;
   }
 }
 
@@ -2004,7 +1826,9 @@ ol {
   .submit,
   .hero-portrait,
   .arrow-link,
-  .blink-block {
+  .blink-block,
+  .no-print,
+  .resume-actions {
     display: none !important;
   }
 

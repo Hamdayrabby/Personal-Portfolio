@@ -1,18 +1,12 @@
 import { profile } from '../data/portfolioData';
-import useScrollReveal from '../hooks/useScrollReveal';
 import PixelMosaic from './PixelMosaic';
-import ScrollBot from './ScrollBot';
 
 const year = new Date().getFullYear();
 
 export default function SiteFooter() {
-  // Reveals the footer mosaic strip on pages that don't run the page-level hook.
-  useScrollReveal();
-
   return (
     <footer className="site-footer">
       <PixelMosaic />
-      <ScrollBot />
       <div className="container footer-inner">
         <p className="footer-note">
           {profile.name} — {profile.location}. {profile.availability}.

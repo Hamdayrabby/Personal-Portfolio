@@ -9,13 +9,13 @@ import {
 } from 'react-router-dom';
 import SiteHeader from './components/SiteHeader';
 import SiteFooter from './components/SiteFooter';
-import Loader from './components/Loader';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import CaseStudy from './pages/CaseStudy';
 import About from './pages/About';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -35,7 +35,6 @@ function WorkSlugRedirect() {
 export default function App() {
   return (
     <Router>
-      <Loader />
       <ScrollToTop />
       <SiteHeader />
       <main id="main-content">
@@ -48,7 +47,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<CaseStudy />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <SiteFooter />
