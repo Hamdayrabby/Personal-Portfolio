@@ -34,14 +34,17 @@ export default function Contact() {
         message: form.message,
       })
       .then(() => {
-        setStatus({ type: 'success', message: 'Sent. I’ll reply to the address you gave.' });
+        setStatus({
+          type: 'success',
+          message: `Sent. I’ll reply within ${profile.responseTime}.`,
+        });
         setForm({ name: '', email: '', message: '' });
       })
       .catch((error) => {
         console.error('EmailJS error:', error);
         setStatus({
           type: 'error',
-          message: `Sending failed. Email ${profile.email} directly instead.`,
+          message: `Sending failed — please email ${profile.email} directly.`,
         });
       })
       .finally(() => setLoading(false));
@@ -153,7 +156,7 @@ export default function Contact() {
               {status && <p className={`form-status ${status.type}`}>{status.message}</p>}
 
               <button type="submit" className="submit" disabled={loading}>
-                {loading ? 'Sending…' : 'Send'}
+                {loading ? 'Sending…' : 'Send message'}
               </button>
             </form>
           </div>

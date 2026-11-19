@@ -19,6 +19,8 @@ export const profile = {
   leetcode: "https://leetcode.com/hamdayrabby385",
   resumePdf: "https://drive.google.com/drive/folders/1XoXvKh_4OuX0FQK6tvhTnqsYz42Yz8Kd?usp=sharing",
   availability: "Open to AI engineering and backend roles",
+  // TODO(owner): confirm the response-time promise below before shipping.
+  responseTime: "2 working days",
   // Hero role ticker — animated one after another, in this order.
   roles: ["Software Developer", "Researcher", "AI Engineer"],
 
