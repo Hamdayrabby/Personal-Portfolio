@@ -4,7 +4,6 @@ import useScrollReveal from '../hooks/useScrollReveal';
 import usePageMeta from '../hooks/usePageMeta';
 import RoleTicker from '../components/RoleTicker';
 import PixelImage from '../components/PixelImage';
-import PixelMosaic from '../components/PixelMosaic';
 import WorkRow from '../components/WorkRow';
 import WorkCard from '../components/WorkCard';
 
@@ -71,8 +70,6 @@ export default function Home() {
           </figure>
         </div>
       </section>
-
-      <PixelMosaic />
 
       {/* Selected work */}
       <section className="section" id="work">

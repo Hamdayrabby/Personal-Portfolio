@@ -1,13 +1,5 @@
 const SIZE = 23; // measured 23px pixel squares
-const COLORS = [
-  '#bced12', // lime
-  '#566912', // dimmed olive 1
-  '#5b7012', // dimmed olive 2
-  '#617812', // dimmed olive 3
-  '#bced12', // lime again — roughly 2:1 lime vs olive
-  '#566912',
-  '#f6c53a', // a few gold squares
-];
+const COUNT = 54;
 
 /** Small deterministic PRNG — the strip must be identical on every render. */
 function mulberry32(seed) {
@@ -20,46 +12,25 @@ function mulberry32(seed) {
   };
 }
 
-function buildStrip(seed, count) {
-  const rand = mulberry32(seed);
-  const squares = [];
-  for (let i = 0; i < count; i += 1) {
-    const roll = rand();
-    squares.push({
-      left: (i / count) * 100,
-      row: roll < 0.45 ? 0 : roll < 0.8 ? 1 : 2,
-      color: COLORS[Math.floor(rand() * COLORS.length)],
-      delay: Math.round(rand() * 320),
-    });
-  }
-  return squares;
-}
+/* D5: one static monochrome strip in the footer only. Grey squares on the
+   page background, baked at module load, no animation, no reveal classes. */
+const SQUARES = (() => {
+  const rand = mulberry32(0x5eed);
+  return Array.from({ length: COUNT }, (_, i) => ({
+    left: (i / COUNT) * 100,
+    row: rand() < 0.45 ? 0 : rand() < 0.8 ? 1 : 2,
+    opacity: 0.35 + rand() * 0.4,
+  }));
+})();
 
-// Computed once at module load with a fixed seed — stable pattern, no
-// Math.random anywhere.
-const SQUARES = buildStrip(0x5eed, 54);
-
-/**
- * Decorative strip of 23px pixel squares clustered at a section boundary.
- * Squares stagger in on scroll-reveal via the shared `.reveal` system and
- * collapse to a fully static pattern under prefers-reduced-motion.
- */
-export default function PixelMosaic({ className = '' }) {
+export default function PixelMosaic() {
   return (
-    <div
-      className={`pixel-mosaic reveal${className ? ` ${className}` : ''}`}
-      aria-hidden="true"
-    >
+    <div className="pixel-mosaic is-visible" aria-hidden="true">
       {SQUARES.map((s, i) => (
         <span
           key={i}
           className="px"
-          style={{
-            left: `${s.left}%`,
-            top: `${s.row * SIZE}px`,
-            background: s.color,
-            transitionDelay: `${s.delay}ms`,
-          }}
+          style={{ left: `${s.left}%`, top: `${s.row * SIZE}px`, opacity: s.opacity }}
         />
       ))}
     </div>

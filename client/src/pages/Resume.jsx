@@ -10,9 +10,7 @@ export default function Resume() {
   );
   return (
     <div className="container" style={{ paddingBlock: 'clamp(3rem, 8vw, 6rem)' }}>
-      <p className="eyebrow">Resume</p>
-
-      <h1 className="display" style={{ fontSize: 'var(--step-3)', marginTop: '1.25rem' }}>
+      <h1 className="display" style={{ fontSize: 'var(--step-3)', marginTop: '0' }}>
         {profile.name}
       </h1>
       <p style={{ color: 'var(--muted)', marginTop: '0.5rem' }}>

@@ -21,7 +21,6 @@ export default function About() {
     <div>
       <section className="hero" style={{ paddingBottom: 0 }}>
         <div className="container">
-          <p className="eyebrow">About</p>
           <h1 className="lede" style={{ marginTop: '1.25rem', maxWidth: '16ch' }}>
             How I got here, and what I actually care about.
           </h1>

@@ -35,7 +35,6 @@ export default function Projects() {
     <div>
       <section className="hero" style={{ paddingBottom: '0' }}>
         <div className="container">
-          <p className="eyebrow">Index</p>
           <h1 className="lede" style={{ marginTop: '1.25rem', maxWidth: '18ch' }}>
             Everything I&rsquo;ve built that is worth explaining.
           </h1>

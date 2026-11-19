@@ -807,22 +807,7 @@ ol {
   position: absolute;
   width: 23px;
   height: 23px;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
-}
-
-.pixel-mosaic.is-visible .px {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pixel-mosaic .px {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
+  background: var(--border);
 }
 
 /* --- Scroll dots — gold Pac-Man-style trail on the right edge ---------------- */
@@ -1909,11 +1894,6 @@ ol {
 .footer-links a:hover {
   color: var(--accent);
   border-bottom-color: var(--accent);
-}
-
-.footer-gamepad {
-  color: var(--accent-gold);
-  display: inline-flex;
 }
 
 /* --- Reveal -------------------------------------------------------------------------------- */

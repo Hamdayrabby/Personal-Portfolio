@@ -54,7 +54,6 @@ export default function Contact() {
     <div>
       <section className="hero" style={{ paddingBottom: 0 }}>
         <div className="container">
-          <p className="eyebrow">Contact</p>
           <h1 className="lede" style={{ marginTop: '1.25rem', maxWidth: '18ch' }}>
             Write to me about a role, a system, or a decision you&rsquo;d have made differently.
           </h1>
