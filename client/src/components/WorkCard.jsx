@@ -1,11 +1,19 @@
 import { Link } from 'react-router-dom';
 
-/**
- * One card in the Selected-work grid. `span` is the column count on the
- * 6-column desktop grid and drives the content variant: 4 = large
- * (summary + tags), 3 = medium (summary), 2 = small. The visual area is
- * a neutral placeholder until the architecture diagrams (phase 4, T19+).
- */
+/* Spec §5.1 card anatomy: visual slot (placeholder until the phase-4
+   diagrams), title, one-line outcome, ≤4 tags, access label. The whole
+   card links to the case study. */
+function accessLabel(item) {
+  if (item.visibility === 'private') {
+    return 'Private codebase — walkthrough on request';
+  }
+  const links = item.links || [];
+  const lower = links.map((l) => l.label.toLowerCase());
+  if (lower.includes('live')) return 'Live site';
+  if (lower.includes('github')) return 'Open source';
+  return 'Public';
+}
+
 export default function WorkCard({ item, span, index }) {
   const variant = span >= 4 ? 'lg' : span >= 3 ? 'md' : 'sm';
 
@@ -21,16 +29,14 @@ export default function WorkCard({ item, span, index }) {
         <h3 className="work-card-title">{item.title}</h3>
         <p className="work-card-sub">{item.subtitle || item.venue}</p>
         <p className="work-card-summary">{item.summary}</p>
-        {item.visibility === 'private' && <p className="card-private">Private codebase</p>}
-        {variant === 'lg' && (
-          <div className="card-tags">
-            {item.stack.slice(0, 6).map((tech) => (
-              <span className="tag" key={tech}>
-                {tech}
-              </span>
-            ))}
-          </div>
-        )}
+        <div className="card-tags">
+          {item.stack.slice(0, 4).map((tech) => (
+            <span className="tag" key={tech}>
+              {tech}
+            </span>
+          ))}
+        </div>
+        <p className="card-access">{accessLabel(item)}</p>
       </div>
     </Link>
   );

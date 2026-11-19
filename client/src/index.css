@@ -961,7 +961,6 @@ ol {
 .work-card:hover,
 .work-card:focus-visible {
   border-color: var(--accent);
-  box-shadow: 6px 6px 0 var(--border);
 }
 
 /* Neutral visual slot — the architecture diagrams land here in phase 4. */
@@ -1023,13 +1022,15 @@ ol {
   max-width: 52ch;
 }
 
-.work-card .card-private {
-  align-self: flex-start;
+.work-card .card-tags {
+  padding-top: 0.5rem;
 }
 
-.work-card .card-tags {
+.work-card .card-access {
   margin-top: auto;
   padding-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
 }
 
 .span-4 {
@@ -1258,8 +1259,6 @@ ol {
 
 .project-card:hover {
   border-color: var(--accent);
-  /* Hard offset shadow, card does not float. */
-  box-shadow: 6px 6px 0 var(--accent-deep);
 }
 
 .project-card .card-type {
