@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projects, research, archive, featuredOrder } from '../data/portfolioData';
 import usePageMeta from '../hooks/usePageMeta';
+import ArchitectureDiagram from '../components/ArchitectureDiagram';
 
 const FILTERS = [
   { key: 'all', label: 'All' },
@@ -82,16 +83,21 @@ export default function Projects() {
                 className="project-card"
                 data-kind={p.kind}
               >
-                <p className="card-type">{p.kind === 'research' ? 'Research' : 'Product'}</p>
-                <h3 className="card-title">{p.title}</h3>
-                <p className="card-sub">{p.subtitle || p.venue}</p>
-                {p.visibility === 'private' && <p className="card-private">Private codebase</p>}
-                <div className="card-tags">
-                  {p.stack.map((t) => (
-                    <span className="tag" key={t}>
-                      {t}
-                    </span>
-                  ))}
+                <div className="work-card-visual">
+                  <ArchitectureDiagram slug={p.slug} compact />
+                </div>
+                <div className="project-card-body">
+                  <p className="card-type">{p.kind === 'research' ? 'Research' : 'Product'}</p>
+                  <h3 className="card-title">{p.title}</h3>
+                  <p className="card-sub">{p.subtitle || p.venue}</p>
+                  {p.visibility === 'private' && <p className="card-private">Private codebase</p>}
+                  <div className="card-tags">
+                    {p.stack.map((t) => (
+                      <span className="tag" key={t}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </Link>
             ))}

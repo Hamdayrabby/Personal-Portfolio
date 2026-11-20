@@ -981,11 +981,21 @@ ol {
   border-color: var(--accent);
 }
 
-/* Neutral visual slot — the architecture diagrams land here in phase 4. */
+/* Architecture diagram visual slot */
 .work-card-visual {
   aspect-ratio: 16 / 9;
-  background: var(--surface);
+  background: #141414;
   border-bottom: 2px solid var(--rule);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.work-card-visual svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .work-card-body {
@@ -1267,12 +1277,21 @@ ol {
 .project-card {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0;
   border: 2px solid var(--rule);
   background: var(--paper);
-  padding: 1.5rem;
+  padding: 0;
   color: inherit;
   text-decoration: none;
+  overflow: hidden;
+}
+
+.project-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  flex: 1;
 }
 
 .project-card:hover {

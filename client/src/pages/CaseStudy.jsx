@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { projects, research } from '../data/portfolioData';
 import useScrollReveal from '../hooks/useScrollReveal';
 import usePageMeta from '../hooks/usePageMeta';
+import ArchitectureDiagram from '../components/ArchitectureDiagram';
 
 const entries = [...projects, ...research];
 
@@ -78,6 +79,26 @@ export default function CaseStudy() {
         <section className="case-section">
           <h2>Context</h2>
           <p className="case-body">{item.context}</p>
+        </section>
+
+        <section className="case-section">
+          <h2>Architecture</h2>
+          <div
+            className="case-diagram"
+            style={{
+              border: '2px solid var(--rule)',
+              borderRadius: 'var(--radius)',
+              overflow: 'hidden',
+              background: '#141414',
+              aspectRatio: '16 / 9',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: '1.25rem',
+            }}
+          >
+            <ArchitectureDiagram slug={item.slug} />
+          </div>
         </section>
 
         <section className="case-section">
