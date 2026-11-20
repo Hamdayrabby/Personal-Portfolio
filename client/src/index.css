@@ -18,8 +18,7 @@
   --border: #262626;
   --border-strong: #3a3a3a;
   --text: #ededed;
-  --text-muted: #a3a3a3;
-  /* 7.4:1 on --bg — passes 4.5:1 */
+  --text-muted: #a3a3a3;      /* 7.4:1 on --bg — passes 4.5:1 */
   --accent: #b8e62e;
   --radius: 6px;
 
@@ -33,8 +32,7 @@
   --rule-strong: var(--border-strong);
 
   --accent-bright: var(--accent);
-  --accent-gold: var(--accent);
-  /* one-accent rule: former gold details render lime */
+  --accent-gold: var(--accent);   /* one-accent rule: former gold details render lime */
   --accent-deep: var(--border-strong);
   --accent-fill: var(--accent);
   --accent-fill-hover: var(--accent);
@@ -46,8 +44,7 @@
   --olive-3: var(--border-strong);
 
   --status-ok: var(--accent);
-  --status-err: #d17060;
-  /* semantic error color, distinct from the accent */
+  --status-err: #d17060;          /* semantic error color, distinct from the accent */
 
   --font-pixel: 'Press Start 2P', 'Courier New', monospace;
   --font-display: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -60,8 +57,7 @@
   --step-1: 1.125rem;
   --step-2: clamp(1.4375rem, 1.15rem + 1.2vw, 1.875rem);
   --step-3: clamp(1.875rem, 1.4rem + 2.2vw, 2.75rem);
-  --step-4: clamp(2.25rem, 5vw, 4rem);
-  /* spec §3 H1 scale */
+  --step-4: clamp(2.25rem, 5vw, 4rem);   /* spec §3 H1 scale */
 
   --gutter: clamp(1.25rem, 4vw, 3rem);
   --measure: 68ch;
@@ -79,9 +75,7 @@
 .tag,
 .form-status,
 .case-note,
-.hero-portrait img,
-.field input,
-.field textarea {
+.hero-portrait img {
   border-radius: var(--radius);
 }
 
@@ -131,7 +125,7 @@ svg {
 
 /* Pixel-art rendering for every raster image — squares all the way down. */
 img {
-  image-rendering: auto;
+  image-rendering: pixelated;
 }
 
 a {
@@ -197,7 +191,6 @@ ol {
   html {
     scroll-behavior: auto;
   }
-
   *,
   *::before,
   *::after {
@@ -205,7 +198,6 @@ ol {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-
   .blink-block {
     animation: none !important;
   }
@@ -227,7 +219,7 @@ ol {
   padding-block: var(--section-gap);
 }
 
-.section+.section {
+.section + .section {
   border-top: 2px solid var(--rule);
 }
 
@@ -260,7 +252,7 @@ ol {
 .back-link,
 .work-row-meta,
 .hero-meta,
-.case-section>h2,
+.case-section > h2,
 .case-nav .dir {
   font-family: var(--font-sans);
   font-size: 0.8125rem;
@@ -304,7 +296,7 @@ ol {
   line-height: 1.75;
 }
 
-.prose p+p {
+.prose p + p {
   margin-top: 1.15rem;
 }
 
@@ -347,6 +339,74 @@ ol {
 
 .arrow-link:hover .arrow {
   color: var(--accent-bright);
+}
+
+/* --- Loader ---------------------------------------------------------------- */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  transition: opacity 0.24s var(--ease);
+}
+
+.loader.is-done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.loader-name {
+  font-family: var(--font-pixel);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  line-height: 1.8;
+  text-align: center;
+}
+
+.loader-bar {
+  display: flex;
+  gap: 6px;
+}
+
+.loader-block {
+  width: 14px;
+  height: 14px;
+  background: var(--border);
+}
+
+/* Blocks fill left to right and STAY filled — a progress bar, not a blink. */
+.loader-block.is-filled {
+  background: var(--accent);
+}
+
+.loader-pct {
+  color: var(--accent);
+}
+
+.loader-label {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.loader-label .role-cursor {
+  width: 0.55em;
+  height: 0.9em;
 }
 
 /* --- Pixel image placeholder --------------------------------------------- */
@@ -510,7 +570,7 @@ ol {
 
 @media (max-width: 640px) {
   .brand {
-    font-size: 0.75rem;
+    font-size: 0.55rem;
   }
 
   .nav-toggle {
@@ -601,42 +661,6 @@ ol {
   letter-spacing: -0.01em;
   color: var(--ink);
   max-width: 22ch;
-}
-
-.hero-heading {
-  font-family: var(--font-display);
-  font-size: var(--step-4);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-  max-width: 14ch;
-  color: var(--text);
-}
-
-.hero-subline {
-  margin-top: 1.25rem;
-  font-size: var(--step-1);
-  line-height: 1.65;
-  color: var(--text-muted);
-  max-width: 54ch;
-}
-
-.hero-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: 1.5rem;
-  font-size: var(--step--1);
-  color: var(--text);
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--accent);
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow: 0 0 8px rgba(184, 230, 46, 0.4);
 }
 
 .role-cursor {
@@ -733,12 +757,10 @@ ol {
 }
 
 @keyframes blink {
-
   0%,
   55% {
     opacity: 1;
   }
-
   56%,
   100% {
     opacity: 0;
@@ -755,8 +777,7 @@ ol {
 
 .hero-portrait img {
   width: 100%;
-  height: auto;
-  /* let aspect-ratio win over the width/height attributes */
+  height: auto; /* let aspect-ratio win over the width/height attributes */
   aspect-ratio: 4 / 5;
   object-fit: cover;
   /* Real photograph — the global pixelated rule is for pixel-art assets. */
@@ -783,8 +804,7 @@ ol {
 
 .pixel-mosaic {
   position: relative;
-  height: 69px;
-  /* three 23px rows */
+  height: 69px; /* three 23px rows */
   overflow: hidden;
   pointer-events: none;
 }
@@ -796,27 +816,164 @@ ol {
   background: var(--border);
 }
 
-/* --- Work grid (Selected work — uniform 2-col grid, full-width ORA) --------- */
+/* --- Scroll dots — gold Pac-Man-style trail on the right edge ---------------- */
+
+.scroll-bot {
+  position: fixed;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  pointer-events: none;
+}
+
+.bot-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scroll-bot .dot {
+  width: 7px;
+  height: 7px;
+  background: var(--olive-2);
+}
+
+.scroll-bot .dot.is-filled {
+  background: var(--accent-gold);
+}
+
+/* The bot rides the rail: JS sets translateY from scroll progress. */
+.bot {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 26px;
+  transform: translate(-50%, 0);
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.55));
+}
+
+.bot-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Idle: gentle two-frame hover bob + antenna blink. */
+.bot-svg {
+  animation: bot-bob 1.6s steps(2, end) infinite;
+}
+
+@keyframes bot-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.bot-antenna {
+  animation: bot-blink 2.4s steps(1, end) infinite;
+}
+
+.bot-eye {
+  animation: bot-blink 3.6s steps(1, end) infinite;
+}
+
+.bot-core {
+  animation: bot-blink 1.2s steps(1, end) infinite;
+}
+
+@keyframes bot-blink {
+  0%,
+  86%,
+  100% {
+    opacity: 1;
+  }
+  90%,
+  96% {
+    opacity: 0;
+  }
+}
+
+/* While scrolling: legs step, flames flicker on. */
+.scroll-bot.is-moving .bot-leg.leg-a {
+  animation: bot-step 0.4s steps(1, end) infinite;
+}
+
+.scroll-bot.is-moving .bot-leg.leg-b {
+  animation: bot-step 0.4s steps(1, end) infinite reverse;
+}
+
+@keyframes bot-step {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.bot-flames {
+  opacity: 0;
+}
+
+.scroll-bot.is-moving .bot-flames {
+  opacity: 1;
+  animation: bot-flame 0.24s steps(1, end) infinite;
+}
+
+@keyframes bot-flame {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(1px);
+    opacity: 0.55;
+  }
+}
+
+@media (max-width: 1100px) {
+  .scroll-bot {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bot-svg,
+  .bot-antenna,
+  .bot-eye,
+  .bot-core,
+  .bot-leg,
+  .bot-flames {
+    animation: none;
+  }
+
+  .bot-flames {
+    opacity: 0;
+  }
+}
+
+/* --- Work grid (Selected work — asymmetric retro cards) ----------------------- */
 
 .work-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 1.5rem;
 }
 
 .work-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: var(--radius);
-  transition: border-color 0.15s ease;
-  overflow: hidden;
-  height: 100%;
-}
-
-.work-card.is-featured {
-  grid-column: 1 / -1;
+  border: 2px solid var(--rule);
+  background: transparent;
+  transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
 }
 
 .work-card:hover,
@@ -824,27 +981,18 @@ ol {
   border-color: var(--accent);
 }
 
+/* Neutral visual slot — the architecture diagrams land here in phase 4. */
 .work-card-visual {
   aspect-ratio: 16 / 9;
-  background: #141414;
-  border-bottom: 1px solid var(--border);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.work-card-visual svg {
-  width: 100%;
-  height: 100%;
-  display: block;
+  background: var(--surface);
+  border-bottom: 2px solid var(--rule);
 }
 
 .work-card-body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 1.25rem 1.4rem 1.5rem;
+  padding: 1.15rem 1.3rem 1.4rem;
   flex: 1;
 }
 
@@ -856,18 +1004,25 @@ ol {
 .work-card-title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.6rem);
-  line-height: 1.2;
+  line-height: 1.1;
   letter-spacing: -0.01em;
-  transition: color 0.15s ease;
+  transition: color 0.15s var(--ease);
 }
 
 .work-card:hover .work-card-title {
   color: var(--accent);
 }
 
-.work-card.is-featured .work-card-title {
-  font-size: clamp(1.5rem, 1.3rem + 1.2vw, 2.1rem);
+.variant-lg .work-card-title {
+  font-size: clamp(1.6rem, 1.3rem + 1.4vw, 2.3rem);
+}
+
+.variant-md .work-card-title {
+  font-size: clamp(1.3rem, 1.1rem + 0.9vw, 1.7rem);
+}
+
+.variant-sm .work-card-title {
+  font-size: 1.15rem;
 }
 
 .work-card-sub {
@@ -881,32 +1036,58 @@ ol {
   line-height: 1.65;
 }
 
-.work-card.is-featured .work-card-summary {
-  max-width: 60ch;
+.variant-lg .work-card-summary {
+  max-width: 52ch;
 }
 
 .work-card .card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
   padding-top: 0.5rem;
 }
 
 .work-card .card-access {
   margin-top: auto;
-  padding-top: 0.75rem;
-  font-size: 0.78rem;
+  padding-top: 0.5rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
-@media (max-width: 768px) {
+.span-4 {
+  grid-column: span 4;
+}
+
+.span-3 {
+  grid-column: span 3;
+}
+
+.span-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 1000px) {
   .work-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.1rem;
   }
 
-  .work-card.is-featured {
-    grid-column: 1;
+  .span-4 {
+    grid-column: span 2;
+  }
+
+  .span-3,
+  .span-2 {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 620px) {
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .span-4,
+  .span-3,
+  .span-2 {
+    grid-column: span 1;
   }
 }
 
@@ -1028,18 +1209,9 @@ ol {
 
 .projects-filter {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
-}
-
-.filter-chips {
-  display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  align-items: center;
+  margin-bottom: 2.5rem;
 }
 
 .filter-btn {
@@ -1233,7 +1405,7 @@ ol {
   margin-top: clamp(3rem, 6vw, 4.75rem);
 }
 
-.case-section>h2 {
+.case-section > h2 {
   padding-bottom: 0.75rem;
   margin-bottom: 1.75rem;
   border-bottom: 2px solid var(--rule);
@@ -1594,8 +1766,7 @@ ol {
 .field input,
 .field textarea {
   background: var(--paper-raised);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 2px solid var(--rule);
   padding: 0.75rem 0.9rem;
   font-size: var(--step-0);
   color: var(--ink);
@@ -1725,42 +1896,37 @@ ol {
   border-bottom-color: var(--accent);
 }
 
-/* --- Reveal (spec §4: no scroll-triggered fade-ins on sections; one load reveal on hero only) ---- */
+/* --- Reveal -------------------------------------------------------------------------------- */
 
 .reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  /* Stepped timing — content lands in chunky pixel jumps, not smooth fades.
+     A little longer so the scroll actually shows the lazy-load land. */
+  transition: opacity 0.55s steps(6, end), transform 0.55s steps(6, end);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
   opacity: 1;
   transform: none;
 }
 
-.hero-load {
-  animation: heroFadeIn 0.35s ease-out both;
-}
-
-@keyframes heroFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .hero-load {
-    animation: none !important;
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
 /* --- Utility --------------------------------------------------------------------------------- */
 
-.stack-lg>*+* {
+.stack-lg > * + * {
   margin-top: 2.5rem;
 }
 
-.stack-md>*+* {
+.stack-md > * + * {
   margin-top: 1.25rem;
 }
 
@@ -1838,9 +2004,7 @@ ol {
   .submit,
   .hero-portrait,
   .arrow-link,
-  .blink-block,
-  .no-print,
-  .resume-actions {
+  .blink-block {
     display: none !important;
   }
 

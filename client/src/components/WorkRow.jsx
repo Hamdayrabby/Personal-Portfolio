@@ -2,13 +2,18 @@ import { Link } from 'react-router-dom';
 
 /**
  * A single row in a work list. The whole row is the link, so the target
- * area is the full width rather than a small word.
+ * area is the full width rather than a small word. `index` staggers the
+ * scroll reveal between siblings (max ~60ms apart).
  */
-export default function WorkRow({ item, meta }) {
+export default function WorkRow({ item, meta, index = 0 }) {
   const isPrivate = item.visibility === 'private';
 
   return (
-    <Link to={`/projects/${item.slug}`} className="work-row">
+    <Link
+      to={`/projects/${item.slug}`}
+      className="work-row reveal"
+      style={{ '--reveal-delay': `${Math.min(index * 60, 240)}ms` }}
+    >
       <div>
         <h3 className="work-row-title">
           {item.title}{' '}

@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { projects, research, archive, featuredOrder } from '../data/portfolioData';
 import usePageMeta from '../hooks/usePageMeta';
-import WorkCard from '../components/WorkCard';
 
 const FILTERS = [
   { key: 'all', label: 'All' },
@@ -9,7 +9,7 @@ const FILTERS = [
   { key: 'research', label: 'Research' },
 ];
 
-// Products in featured order first, then remaining products, then research
+// Products first, in their featured order, then research entries.
 const allEntries = [
   ...featuredOrder
     .map((slug) => projects.find((item) => item.slug === slug))
@@ -31,15 +31,11 @@ export default function Projects() {
   const countLabel =
     filter === 'product' ? 'projects' : filter === 'research' ? 'research' : 'entries';
 
-  // Group coursework items cleanly in archive
-  const mainArchive = archive.filter(item => !item.org?.toLowerCase().includes('coursework'));
-  const courseworkArchive = archive.filter(item => item.org?.toLowerCase().includes('coursework'));
-
   return (
     <div>
       <section className="hero" style={{ paddingBottom: '0' }}>
         <div className="container">
-          <h1 className="lede" style={{ marginTop: '1.25rem', maxWidth: '20ch' }}>
+          <h1 className="lede" style={{ marginTop: '1.25rem', maxWidth: '18ch' }}>
             Everything I&rsquo;ve built that is worth explaining.
           </h1>
           <p
@@ -62,27 +58,42 @@ export default function Projects() {
       <section className="section">
         <div className="container">
           <div className="projects-filter">
-            <div className="filter-chips">
-              {FILTERS.map((f) => (
-                <button
-                  key={f.key}
-                  type="button"
-                  className={filter === f.key ? 'filter-btn is-active' : 'filter-btn'}
-                  aria-pressed={filter === f.key}
-                  onClick={() => setFilter(f.key)}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
+            {FILTERS.map((f) => (
+              <button
+                key={f.key}
+                type="button"
+                className={filter === f.key ? 'filter-btn is-active' : 'filter-btn'}
+                aria-pressed={filter === f.key}
+                onClick={() => setFilter(f.key)}
+              >
+                {f.label}
+              </button>
+            ))}
             <span className="count">
               {visible.length} {countLabel}
             </span>
           </div>
 
-          <div className="work-grid" style={{ marginTop: '2rem' }}>
+          <div className="projects-grid">
             {visible.map((p) => (
-              <WorkCard key={p.slug} item={p} />
+              <Link
+                key={p.slug}
+                to={`/projects/${p.slug}`}
+                className="project-card"
+                data-kind={p.kind}
+              >
+                <p className="card-type">{p.kind === 'research' ? 'Research' : 'Product'}</p>
+                <h3 className="card-title">{p.title}</h3>
+                <p className="card-sub">{p.subtitle || p.venue}</p>
+                {p.visibility === 'private' && <p className="card-private">Private codebase</p>}
+                <div className="card-tags">
+                  {p.stack.map((t) => (
+                    <span className="tag" key={t}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </Link>
             ))}
             {visible.length === 0 && <p>No entries match this filter.</p>}
           </div>
@@ -98,7 +109,7 @@ export default function Projects() {
           </div>
 
           <div className="archive-list">
-            {mainArchive.map((item) => (
+            {archive.map((item) => (
               <article className="archive-item" key={item.title}>
                 <div>
                   <h3 className="archive-title">{item.title}</h3>
@@ -109,21 +120,20 @@ export default function Projects() {
                 <div>
                   <p className="archive-summary">{item.summary}</p>
                   <div className="archive-links">
-                    {item.visibility === 'private' ? (
-                      <span className="card-private">Private codebase — walkthrough on request</span>
-                    ) : (
-                      item.links?.map((link) => (
-                        <a
-                          key={link.href}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="link"
-                        >
-                          {link.label} ↗
-                        </a>
-                      ))
+                    {item.visibility === 'private' && (
+                      <span className="card-private">Private codebase</span>
                     )}
+                    {item.links?.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
                   </div>
                   <div className="card-tags">
                     {item.stack.map((tech) => (
@@ -135,51 +145,6 @@ export default function Projects() {
                 </div>
               </article>
             ))}
-
-            {courseworkArchive.length > 0 && (
-              <div style={{ marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px dashed var(--border)' }}>
-                <p style={{ fontSize: 'var(--step--1)', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
-                  Earlier coursework & academic systems
-                </p>
-                {courseworkArchive.map((item) => (
-                  <article className="archive-item" key={item.title}>
-                    <div>
-                      <h3 className="archive-title">{item.title}</h3>
-                      <p className="archive-org">
-                        {item.org} · {item.year}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="archive-summary">{item.summary}</p>
-                      <div className="archive-links">
-                        {item.visibility === 'private' ? (
-                          <span className="card-private">Private codebase — walkthrough on request</span>
-                        ) : (
-                          item.links?.map((link) => (
-                            <a
-                              key={link.href}
-                              href={link.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="link"
-                            >
-                              {link.label} ↗
-                            </a>
-                          ))
-                        )}
-                      </div>
-                      <div className="card-tags">
-                        {item.stack.map((tech) => (
-                          <span className="tag" key={tech}>
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
           </div>
         </div>
       </section>
